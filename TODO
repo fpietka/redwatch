@@ -1,0 +1,15 @@
+- information on mouse over with 3 last actions on a ticket
+- modification in bold + blink tray icon
+- keep order after add or delete
+- add keyboard events on login, password and tickets fields
+- move task from a tab to another
+
+---
+
+task.tickets = ticket by tabs
+task.data = all tickets data, no tab information there
+when refreshing, check if ticket has not already been processed, if so skip it
+
+adding a ticket is re-creating existing tab
+we can add non existant ticket
+factorize settings objects
