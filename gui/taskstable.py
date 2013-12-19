@@ -68,8 +68,8 @@ class TasksTableModel(QAbstractTableModel):
     def sort(self, Ncol, order):
         """Sort table by given column number.
         """
-        self._parent._setSortCol(Ncol)
-        self._parent._setSortOrder(order)
+        self._parent._setColSort(Ncol, 'defaultTicketsOrderField')
+        self._parent._setColSort(order, 'defaultTicketsOrderWay')
 
         self.emit(SIGNAL("layoutAboutToBeChanged()"))
         try:

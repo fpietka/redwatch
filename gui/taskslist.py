@@ -120,19 +120,19 @@ class TasksList(QtGui.QWidget):
     def setData(self, header, data):
         self._table.setData(data, header)
 
-    def _setSortCol(self, col):
-        self._orderCol = col
-        settingsCol = self._parent._app._settings.value('defaultTicketsOrderField').toMap()
-        if settingsCol.has_key(QtCore.QString(self._name)):
-            settingsCol.pop(QtCore.QString(self._name))
-        settingsCol[self._name] = QtCore.QVariant(col)
-        self._parent._app._settings.setValue('defaultTicketsOrderField', settingsCol)
+    def _setColSort(self, col, type):
+        if type not in ('defaultTicketsOrderField', 'defaultTicketsOrderWay'):
+            raise Exception
 
+        if type == 'defaultTicketsOrderField':
+            self._orderCol = col
+        else:
+            self._orderWay = col
 
-    def _setSortOrder(self, order):
-        self._orderWay = order
-        settingsOrder = self._parent._app._settings.value('defaultTicketsOrderWay').toMap()
-        if settingsOrder.has_key(QtCore.QString(self._name)):
-            settingsOrder.pop(QtCore.QString(self._name))
-        settingsOrder[self._name] = QtCore.QVariant(order)
-        self._parent._app._settings.setValue('defaultTicketsOrderWay', settingsOrder)
+        settingsCol = self._parent._app._settings.dictValue(type)
+        if not settingsCol:
+            settingsCol = dict()
+        if settingsCol.has_key(self._name):
+            settingsCol.pop(self._name)
+        settingsCol[self._name] = col
+        self._parent._app._settings.setValue(type, settingsCol)
