@@ -177,7 +177,7 @@ class TaskWindow(QtGui.QMainWindow):
         writer = csv.writer(open(fileName, "wb"))
 
         csvData = []
-        for i in enumerate(self.data['data'][tabName]):
+        for i in enumerate(self.data[tabName]):
             tmp = []
             for v in i[1].values():
                 try:
