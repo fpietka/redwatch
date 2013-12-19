@@ -21,7 +21,6 @@ defaultTicketsOrderWay = 1
 versionFile = os.path.join(rootPath, 'VERSION')
 
 serverUrls = {}
-serverUrls['ticketsList'] = ""
 serverUrls['ticketUrl'] = ""
 serverUrls['checkVersion'] = {'host': "", 'uri': ''}
 

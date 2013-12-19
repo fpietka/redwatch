@@ -1,4 +1,3 @@
-import core.consts as consts
 import json
 from api import Api
 
@@ -10,8 +9,6 @@ class Ticket:
 
         if len(ticketsIdsList) == 0:
             return {'header': [], 'data': []}
-
-        url = consts.serverUrls['ticketsList'] % {'tickets': ','.join(map(str, ticketsIdsList))}
 
         api = Api()
         results = list()
