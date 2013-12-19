@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 from core.settings import SettingsException
 
 
@@ -7,10 +6,10 @@ class TasksManagement:
 
     @staticmethod
     def getTicketsIds(app):
-        settings = app._settings.value('tickets').toString()
+        settings = app._settings.dictValue('tickets')
         if not settings:
             raise SettingsException('No settings found')
-        return json.loads(str(settings))
+        return settings
 
     @staticmethod
     def addTickets(app, tabName, ticketsToAdd):
@@ -30,7 +29,7 @@ class TasksManagement:
             ticketsIds[tabName].append(ticket)
 
         ticketsIds[tabName] = sorted(set(ticketsIds[tabName]))
-        app._settings.setValue('tickets', json.dumps(ticketsIds))
+        app._settings.setValue('tickets', ticketsIds)
 
         return len(ticketsIds[tabName])
 
@@ -53,7 +52,7 @@ class TasksManagement:
 
         try:
             ticketsIds[tabName].remove(str(ticketId))
-            app._settings.setValue('tickets', json.dumps(ticketsIds))
+            app._settings.setValue('tickets', ticketsIds)
             return True
         except:
             return False

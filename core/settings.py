@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+Extends PyQt4.QtCore.QSettings to get and store python objects
+like strings and dictionaries.
+"""
+
 from PyQt4 import QtCore, QtGui
 import core.consts as consts
+import json
 
 
 class SystemSettings(QtCore.QSettings):
@@ -30,13 +36,19 @@ class SystemSettings(QtCore.QSettings):
         return int(self.value(name).toInt()[0])
 
     def setValue(self, key, value):
-        value = str(value)
+        if type(value) is dict:
+            value = str(json.dumps(value))
         super(SystemSettings, self).setValue(key, value)
 
     def stringValue(self, name):
         if not self.contains(name):
             return None
         return str(self.value(name).toString())
+
+    def dictValue(self, name):
+        if not self.contains(name):
+            return None
+        return json.loads(str(self.value(name).toString()))
 
 
 class AppSettings(object):
