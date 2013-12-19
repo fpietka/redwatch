@@ -1,6 +1,6 @@
 import urllib2
 import json
-import time
+import core.consts as consts
 
 class Api():
     def __init__(self):
@@ -15,7 +15,6 @@ class Api():
         return request
 
     def issue(self, issue):
-        start_time = time.time()
         try:
             response = urllib2.urlopen(self._call('issues', issue))
         except urllib2.HTTPError, e:
