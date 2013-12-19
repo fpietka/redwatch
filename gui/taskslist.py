@@ -6,6 +6,7 @@ import webbrowser, re, core.consts
 from gui.taskstable import TasksTable
 from TasksManagement import TasksManagement
 
+
 class TasksList(QtGui.QWidget):
 
     def __init__(self, parent, name, data, header, orderCol, orderWay):
