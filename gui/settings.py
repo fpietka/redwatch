@@ -50,11 +50,9 @@ class SettingsWindow(QtGui.QDialog):
 
         self.setLayout(layout)
 
-
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
             self.close()
-
 
     def saveSettings(self):
         appSettings = settings.AppSettings()
@@ -62,7 +60,6 @@ class SettingsWindow(QtGui.QDialog):
             appSettings.setValue(i, self.fields[i].value())
         self.close()
 
-#Widgets factory
 
 class SettingsFieldFactory:
 
@@ -83,8 +80,6 @@ class SettingsFieldFactory:
         return field
 
 
-#Widgets classes
-
 class BooleanWidget(QtGui.QCheckBox):
     def value(self):
         if self.checkState() == QtCore.Qt.Checked:
@@ -92,12 +87,14 @@ class BooleanWidget(QtGui.QCheckBox):
         else:
             return False
 
+
 class IntWidget(QtGui.QLineEdit):
     def value(self):
         try:
             return int(self.text())
         except ValueError:
             return 1
+
 
 class ColorPickerWidget(QtGui.QPushButton):
     def __init__(self, value):
@@ -118,7 +115,6 @@ class ColorPickerWidget(QtGui.QPushButton):
 
         self.clicked.connect(self.selectColor)
 
-
     def selectColor(self):
         colorDial = QtGui.QColorDialog(QtGui.QColor(self._value), self)
         colorDial.colorSelected.connect(self.changeColor)
@@ -130,7 +126,6 @@ class ColorPickerWidget(QtGui.QPushButton):
         palette = QtGui.QPalette()
         palette.setColor(QtGui.QPalette.Button, QtGui.QColor(self._value))
         self.setPalette(palette)
-
 
     def value(self):
         return self._value
