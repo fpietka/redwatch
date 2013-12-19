@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-from redmine.application import Application
+from gui.application import Application
 import os
 import sys
 import getopt
