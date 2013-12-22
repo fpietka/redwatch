@@ -245,14 +245,20 @@ class TaskWindow(QtGui.QMainWindow):
             self.data[t] = dataRow['data']
 
     def updateData(self):
-        # XXX not so much use for that
-        orderField = 0
-        orderWay = 0
+        # refresh existing tabs name
+        tabs = dict()
+        nbTabs = self._tabWidget.count()
+        for i in range(0, nbTabs):
+            tabName = str(self._tabWidget.tabText(i))
+            tabs[tabName] = self._tabWidget.widget(i)
+        # refresh or create tabs
         for tab, data in self.data.iteritems():
             header = data['header']
             data = data['data']
-            index = self._tabWidget.addTab(TasksList(self, tab, data, header, orderField, orderWay), tab)
-            self._tabWidget.setCurrentIndex(index)
+            if tab in tabs:
+                tabs[tab].setData(data, header)
+            else:
+                self._addNewTab(tab, data, header)
 
         self.displayMessage()
 
