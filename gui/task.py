@@ -137,16 +137,6 @@ class TaskWindow(QtGui.QMainWindow):
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
 
 
-        #the tab is a new tab
-        if not self.tickets.has_key(name):
-            # XXX why?
-            #TasksManagement.addTickets(self._app, name, [])
-            if not self.data:
-                self.data['data'] = dict()
-                self.data['header'] = dict()
-            self.data['data'][name] = []
-            self.data['header'][name] = []
-
         (orderField, orderWay) = self._getListOrder(QtCore.QString(name))
 
         index = self._tabWidget.addTab(TasksList(self, name, data, header, orderField, orderWay), name)
@@ -265,25 +255,6 @@ class TaskWindow(QtGui.QMainWindow):
             self._tabWidget.setCurrentIndex(index)
 
         self.displayMessage()
-        """
-        for tab, tickets in self.tickets.iteritems():
-            data = list()
-            from pprint import pprint
-            for ticket in tickets:
-                pprint(ticket)
-                #pprint(self._data[ticket])
-                #data.append(self._data[ticket])
-
-            #self._addNewTab(tab, self._data[tab], self._header[tab])
-
-
-            pprint(data)
-            # XXX might be what is adding data to the tab
-        """
-        """
-        for t in self._data:
-            self._addNewTab(t, self._data[t], self._header[t])
-        """
 
     #refresh the display
     def refresh(self):
