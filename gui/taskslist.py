@@ -117,7 +117,7 @@ class TasksList(QtGui.QWidget):
                 self._parent.displayMessage('%s Tickets added' % nbAddedTickets)
                 self.newTicketField.setText('')
 
-    def setData(self, header, data):
+    def setData(self, data, header):
         self._table.setData(data, header)
 
     def _setColSort(self, col, type):
