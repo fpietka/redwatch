@@ -9,7 +9,7 @@ from TasksManagement import TasksManagement
 
 class TasksList(QtGui.QWidget):
 
-    def __init__(self, parent, name, data, header, orderCol, orderWay):
+    def __init__(self, parent, name, data, header, orderCol=0, orderWay=0):
         super(TasksList, self).__init__()
 
         self._name = name
