@@ -6,10 +6,6 @@ import os
 appname = 'redmine-tickets'
 company = 'put-your-company-name-here'
 
-# XXX to configure
-redmineApiKey = ""
-redmineUrl = ""
-
 rootPath = os.path.join(os.path.dirname(__file__), '..')
 mainIcon = rootPath + '/resources/redmine_fluid_icon.png'
 exitIcon = rootPath + '/resources/redmine_fluid_icon.png'

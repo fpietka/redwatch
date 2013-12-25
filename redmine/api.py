@@ -1,11 +1,13 @@
 import urllib2
 import json
-import core.consts as consts
+from core.settings import SystemSettings
+
 
 class Api():
     def __init__(self):
-        self.url = consts.redmineUrl + "/%(method)s/%(value)s.%(format)s"
-        self.apikey = consts.redmineApiKey
+        settings = SystemSettings()
+        self.url = settings.value('redmineUrl') + "/%(method)s/%(value)s.%(format)s"
+        self.apikey = settings.value('redmineApiKey')
 
         self.format = 'json'
 

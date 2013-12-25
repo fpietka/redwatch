@@ -5,6 +5,7 @@ import core.consts as consts
 from core.workers import CheckVersionThread
 from core.settings import SystemSettings, AppSettings
 from gui.task import TaskWindow
+from gui.setup import SetupWindow
 
 
 class Application(QtGui.QApplication):
@@ -25,7 +26,10 @@ class Application(QtGui.QApplication):
         if not self._settings.value('defaultTicketsOrderWay'):
             self._settings.setValue('defaultTicketsOrderWay', {});
 
-        self.launchMainWindow()
+        if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
+            self.launchSetupWindow()
+        else:
+            self.launchMainWindow()
 
         sys.exit(self.exec_())
 
@@ -33,6 +37,11 @@ class Application(QtGui.QApplication):
         self.widget = TaskWindow(self)
         self.checkVersion(True)
         self.widget.displayWindow()
+
+    def launchSetupWindow(self):
+        # must belong to the application
+        self._setupWindow = SetupWindow(self)
+        self.connect(self._setupWindow, QtCore.SIGNAL('FirstSetupOk'), self.launchMainWindow)
 
     # XXX following code to a thread
 
