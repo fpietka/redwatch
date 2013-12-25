@@ -29,3 +29,28 @@ class Api():
             # XXX raise exception
             return dict()
         return json.loads(response.read())
+
+    @staticmethod
+    def statuses(url, apikey):
+        try:
+            url = '/'.join((url, 'issue_statuses.json'))
+            request = urllib2.Request(url)
+            request.add_header('X-Redmine-API-Key ', apikey)
+            response = urllib2.urlopen(request)
+        except ValueError:
+            raise ApiException("Not an URL")
+        except urllib2.URLError:
+            raise ApiException("An error occurred when fetching url")
+        except urllib2.HTTPError, e:
+            if e.code == 404:
+                raise ApiException("No service found on that URL")
+            if e.code == 401:
+                raise ApiException("Bad API key")
+            else:
+                raise e
+
+        return json.loads(response.read())
+
+
+class ApiException(Exception):
+    pass
