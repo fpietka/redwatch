@@ -5,7 +5,7 @@ Extends PyQt4.QtCore.QSettings to get and store python objects
 like strings and dictionaries.
 """
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore
 import core.consts as consts
 import json
 

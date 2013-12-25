@@ -2,13 +2,14 @@
 import sys
 from PyQt4 import QtGui, QtCore
 import core.consts as consts
-from core.workers import CheckVersionThread
+#from core.workers import CheckVersionThread
 from core.settings import SystemSettings, AppSettings
 from gui.task import TaskWindow
 from gui.setup import SetupWindow
 
 
 class Application(QtGui.QApplication):
+
     def __init__(self):
         super(Application, self).__init__(sys.argv)
 
@@ -17,7 +18,7 @@ class Application(QtGui.QApplication):
         self._appSettings = AppSettings()
 
         # XXX is checking version? move that to a thread
-        self.setLocked(False)
+        #self.setLocked(False)
 
         # init the order field and way in the conf
         # XXX might be done in SystemSettings apparently
@@ -35,7 +36,7 @@ class Application(QtGui.QApplication):
 
     def launchMainWindow(self):
         self.widget = TaskWindow(self)
-        self.checkVersion(True)
+        #self.checkVersion(True)
         self.widget.displayWindow()
 
     def launchSetupWindow(self):
