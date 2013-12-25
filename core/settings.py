@@ -40,15 +40,10 @@ class SystemSettings(QtCore.QSettings):
             value = str(json.dumps(value))
         super(SystemSettings, self).setValue(key, value)
 
-    def stringValue(self, name):
-        if not self.contains(name):
-            return None
-        return str(self.value(name).toString())
-
     def dictValue(self, name):
         if not self.contains(name):
-            return None
-        return json.loads(str(self.value(name).toString()))
+            return dict()
+        return json.loads(self.value(name))
 
 
 class AppSettings(object):
@@ -71,11 +66,11 @@ class AppSettings(object):
 
         if self._settings.contains(name):
             if consts.settings[name]['type'] == consts.SETTINGS_TYPE_COLOR:
-                return getattr(self._settings, name).toString()
+                return getattr(self._settings, name)
             elif consts.settings[name]['type'] == consts.SETTINGS_TYPE_BOOLEAN:
-                return getattr(self._settings, name).toBool()
+                return getattr(self._settings, name)
             elif consts.settings[name]['type'] == consts.SETTINGS_TYPE_INT:
-                return getattr(self._settings, name).toInt()[0]
+                return getattr(self._settings, name)
         else:
             return consts.settings[name]['value']
 

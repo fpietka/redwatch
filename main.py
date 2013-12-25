@@ -1,6 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
+import sip
+# use regular strings
+sip.setapi("QString", 2)
+sip.setapi("QVariant", 2)
+
 from gui.application import Application
 import os
 import sys

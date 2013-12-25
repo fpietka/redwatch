@@ -5,7 +5,6 @@ import operator
 from core.settings import AppSettings
 from PyQt4 import Qt
 #~ from PyQt4.QtCore import QAbstractTableModel
-#~ from PyQt4.QtCore import QVariant
 #~ from PyQt4.QtGui import QTableView
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -36,34 +35,34 @@ class TasksTableModel(QAbstractTableModel):
         # XXX Loop over what is defined in consts for now
         # then over what is in the configuration file
         if not index.isValid():
-            return QVariant()
+            return None
         elif role == Qt.ForegroundRole:
             if self.arraydata[index.row()]['status_name'] == u'Terminé':
-                return QVariant(QColor(appSet.closedColor))
+                return QColor(appSet.closedColor)
             else:
-                return QVariant(QColor(appSet.standardForegroundColor))
+                return QColor(appSet.standardForegroundColor)
         elif role == Qt.BackgroundRole:
             if self.arraydata[index.row()]['status_name'] == u'A déployer':
-                return QVariant(QColor(appSet.toPutOnlineColor))
+                return QColor(appSet.toPutOnlineColor)
             elif self.arraydata[index.row()]['status_name'] in (u'Garantie', u'Résolu'):
-                return QVariant(QColor(appSet.resolvedColor))
+                return QColor(appSet.resolvedColor)
             elif self.arraydata[index.row()]['status_name'] == u'Recette':
-                return QVariant(QColor(appSet.toTestColor))
+                return QColor(appSet.toTestColor)
             elif self.arraydata[index.row()]['status_name'] == u'Cadrage Tech':
-                return QVariant(QColor(appSet.waitingInfosColor))
+                return QColor(appSet.waitingInfosColor)
             elif self.arraydata[index.row()]['status_name'] == '':
-                return QVariant(QColor(appSet.newColor))
+                return QColor(appSet.newColor)
             else:
-                return QVariant(QColor(appSet.standardBackgroundColor))
+                return QColor(appSet.standardBackgroundColor)
         elif role != Qt.DisplayRole:
-            return QVariant()
+            return None
 
-        return self.arraydata[index.row()][str(self.headerData(index.column()).toString())]
+        return self.arraydata[index.row()][self.headerData(index.column())]
 
     def headerData(self, col, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole and len(self.headerdata) > 0:
-            return QVariant(self.headerdata[col])
-        return QVariant()
+            return self.headerdata[col]
+        return dict()
 
     def sort(self, Ncol, order):
         """Sort table by given column number.
@@ -73,7 +72,7 @@ class TasksTableModel(QAbstractTableModel):
 
         self.emit(SIGNAL("layoutAboutToBeChanged()"))
         try:
-            self.arraydata = sorted(self.arraydata, key=operator.itemgetter(str(self.headerData(Ncol).toString())))
+            self.arraydata = sorted(self.arraydata, key=operator.itemgetter(self.headerData(Ncol)))
         except IndexError:
             pass
         if order == Qt.DescendingOrder:
@@ -133,13 +132,13 @@ class TasksTable(QTableView):
 
     def getData(self, row, col):
         #@TODO call a method from model to get this
-        return self.model().arraydata[row][str(self.model().headerData(col).toString())]
+        return self.model().arraydata[row][self.model().headerData(col)]
 
     def setHeader(self, header):
         self._header = header + self._extraHeader
 
     def getColumnNameFromIndex(self, colIndex):
-        return self.model().headerData(colIndex).toString()
+        return self.model().headerData(colIndex)
 
     def getColumnIndexFromName(self, colName):
         return self._header.index(colName)

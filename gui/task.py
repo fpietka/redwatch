@@ -137,24 +137,24 @@ class TaskWindow(QtGui.QMainWindow):
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
 
 
-        (orderField, orderWay) = self._getListOrder(QtCore.QString(name))
+        (orderField, orderWay) = self._getListOrder(name)
 
         index = self._tabWidget.addTab(TasksList(self, name, data, header, orderField, orderWay), name)
         self._tabWidget.setCurrentIndex(index)
 
     def _getListOrder(self, tabName):
-        settingsOrderField = self._app._settings.value('defaultTicketsOrderField').toMap()
-        settingsOrderWay = self._app._settings.value('defaultTicketsOrderWay').toMap()
+        settingsOrderField = self._app._settings.dictValue('defaultTicketsOrderField')
+        settingsOrderWay = self._app._settings.dictValue('defaultTicketsOrderWay')
 
         if not settingsOrderField.has_key(tabName):
             orderField = consts.defaultTicketsOrderField
         else:
-            orderField = settingsOrderField[tabName].toInt()[0]
+            orderField = settingsOrderField[tabName]
 
         if not settingsOrderWay.has_key(tabName):
             orderWay = consts.defaultTicketsOrderWay
         else:
-            orderWay = settingsOrderWay[tabName].toInt()[0]
+            orderWay = settingsOrderWay[tabName]
 
         return (orderField, orderWay)
 
