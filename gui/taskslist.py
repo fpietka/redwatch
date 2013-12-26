@@ -97,7 +97,7 @@ class TasksList(QtGui.QWidget):
         #get the text field's value
         enteredValue = self.newTicketField.text()
         #get the tickets number in (a ticket number is a int higher thant 999)
-        matches = map(int, re.findall('(\d{4,})', enteredValue))
+        matches = map(int, re.findall(r'(\d{4,})', enteredValue))
 
         #if there is no result, an error message is displayed
         if len(matches) <= 0:
