@@ -57,8 +57,7 @@ class AppSettings(object):
         return cls._instance
 
     def __init__(self):
-        if not self._settings:
-            self._settings = SystemSettings()
+        self._settings = SystemSettings()
 
     def __getattr__(self, name):
         if not consts.settings.has_key(name):
