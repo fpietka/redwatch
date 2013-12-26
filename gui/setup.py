@@ -50,14 +50,11 @@ class SetupWindow(QtGui.QWidget):
     def _saveAction(self):
         url = self._urlField.text()
         apikey = self._apikeyField.text()
-
         if not url:
             self._resultLabel.setText("Please provide an URL")
         elif not apikey:
             self._resultLabel.setText("Please provide an API key")
         else:
-            # XXX use thread
-            #self.setLocked(True)
             try:
                 result = Api.statuses(url, apikey)
                 self._app._settings.setValue('redmineUrl', url)
@@ -67,15 +64,6 @@ class SetupWindow(QtGui.QWidget):
                 self.close()
             except ApiException, e:
                 self._resultLabel.setText(e.message)
-            #loginThread = LoginThread(self)
-            #self.connect(loginThread, QtCore.SIGNAL('loginCall'), self.authResult)
-            #loginThread.start()
-
-    def setLocked(self, locked):
-        self._currentlyAuthenticating = locked
-        self._urlButton.setEnabled(not locked)
-        self._urlField.setEnabled(not locked)
-        self._apikeyField.setEnabled(not locked)
 
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:

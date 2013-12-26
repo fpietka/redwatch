@@ -90,7 +90,7 @@ class AppSettings(object):
         return consts.settings[key]['type']
 
     def setValue(self, key, value):
-        self._settings.setValue(key, value);
+        self._settings.setValue(key, value)
 
 
 class SettingsException(Exception):

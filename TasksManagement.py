@@ -34,7 +34,7 @@ class TasksManagement:
         return len(ticketsIds[tabName])
 
     @staticmethod
-    def purgeTickets(app, tabName = None, removeTab = False):
+    def purgeTickets(app, tabName=None, removeTab=False):
         if tabName != None:
             ticketsIds = TasksManagement.getTicketsIds(app);
             if not removeTab:
@@ -49,7 +49,6 @@ class TasksManagement:
     @staticmethod
     def removeTicket(app, tabName, ticketId):
         ticketsIds = TasksManagement.getTicketsIds(app);
-
         try:
             ticketsIds[tabName].remove(str(ticketId))
             app._settings.setValue('tickets', ticketsIds)

@@ -1,5 +1,4 @@
-import json
-from api import Api
+from redmine.api import Api
 
 
 class Ticket:

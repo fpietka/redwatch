@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
 
 class TaskSystemTrayIcon(QtGui.QSystemTrayIcon):
     def __init__(self, icon, widget, app):

@@ -1,8 +1,8 @@
 # -*- coding: utf8 -*-
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
 from PyQt4.QtGui import QMessageBox
-import webbrowser, re, core.consts
+import webbrowser, re
 from gui.taskstable import TasksTable
 from TasksManagement import TasksManagement
 

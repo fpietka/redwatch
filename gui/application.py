@@ -1,7 +1,6 @@
 # -*- coding: utf8 -*-
 import sys
 from PyQt4 import QtGui, QtCore
-import core.consts as consts
 #from core.workers import CheckVersionThread
 from core.settings import SystemSettings, AppSettings
 from gui.task import TaskWindow

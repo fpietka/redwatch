@@ -132,10 +132,8 @@ class TaskWindow(QtGui.QMainWindow):
                 if not name:
                     QtGui.QMessageBox.critical(self, "Error", "The tab need a name")
                 #already existing tab
-                # XXX check it still works
                 elif self.data and self.data['data'].has_key(name):
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
-
 
         (orderField, orderWay) = self._getListOrder(name)
 

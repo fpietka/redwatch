@@ -76,7 +76,7 @@ class SettingsFieldFactory:
         elif fieldType == consts.SETTINGS_TYPE_INT:
             field = IntWidget(str(value))
         else:
-            field = None;
+            field = None
         return field
 
 

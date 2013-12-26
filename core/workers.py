@@ -4,12 +4,9 @@
 Background worker threads.
 """
 
-import sys
-from time import sleep, time, strftime
-from datetime import datetime
-from PyQt4 import QtCore, QtGui
-import core.consts as consts
-import urllib2, httplib
+from time import sleep
+from PyQt4 import QtCore
+import httplib
 
 from TasksManagement import TasksManagement
 

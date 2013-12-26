@@ -16,10 +16,6 @@ defaultTicketsOrderWay = 1
 
 versionFile = os.path.join(rootPath, 'VERSION')
 
-serverUrls = {}
-serverUrls['ticketUrl'] = ""
-serverUrls['checkVersion'] = {'host': "", 'uri': ''}
-
 #settings
 SETTINGS_TYPE_COLOR = 'color'
 SETTINGS_TYPE_BOOLEAN = 'boolean'
