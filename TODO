@@ -10,6 +10,7 @@ task.tickets = ticket by tabs
 task.data = all tickets data, no tab information there
 when refreshing, check if ticket has not already been processed, if so skip it
 
-adding a ticket is re-creating existing tab
 we can add non existant ticket
 factorize settings objects
+
+handle settings loading errors (in case there are errors in them)
