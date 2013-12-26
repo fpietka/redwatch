@@ -56,10 +56,9 @@ class SetupWindow(QtGui.QWidget):
             self._resultLabel.setText("Please provide an API key")
         else:
             try:
-                result = Api.statuses(url, apikey)
                 self._app._settings.setValue('redmineUrl', url)
                 self._app._settings.setValue('redmineApiKey', apikey)
-                #create the widget
+                result = Api().statuses()
                 self.emit(QtCore.SIGNAL('FirstSetupOk'))
                 self.close()
             except ApiException, e:
