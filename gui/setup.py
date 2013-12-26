@@ -61,7 +61,10 @@ class SetupWindow(QtGui.QWidget):
                 result = Api().statuses()
                 self.emit(QtCore.SIGNAL('FirstSetupOk'))
                 self.close()
-            except ApiException, e:
+            except Exception, e:
+                # empty settings
+                self._app._settings.setValue('redmineUrl', '')
+                self._app._settings.setValue('redmineApiKey', '')
                 self._resultLabel.setText(e.message)
 
     def keyPressEvent(self, e):
