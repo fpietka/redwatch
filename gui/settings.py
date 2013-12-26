@@ -117,6 +117,8 @@ class ColorPickerWidget(QtGui.QPushButton):
 
     def selectColor(self):
         colorDial = QtGui.QColorDialog(QtGui.QColor(self._value), self)
+        for index, color in enumerate(consts.COLORS):
+            colorDial.setCustomColor(index, QtGui.qRgb(color[0], color[1], color[2]))
         colorDial.colorSelected.connect(self.changeColor)
         colorDial.show()
 
