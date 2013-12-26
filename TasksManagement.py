@@ -50,7 +50,7 @@ class TasksManagement:
     def removeTicket(app, tabName, ticketId):
         ticketsIds = TasksManagement.getTicketsIds(app);
         try:
-            ticketsIds[tabName].remove(str(ticketId))
+            ticketsIds[tabName].remove(ticketId)
             app._settings.setValue('tickets', ticketsIds)
             return True
         except:
