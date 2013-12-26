@@ -90,8 +90,7 @@ class TasksList(QtGui.QWidget):
         field = self._table.getColumnNameFromIndex(cell.column())
         #if the cell is the url, open it in the default webbrowser
         if field == 'id':
-            # XXX might now work because of import
-            webbrowser.open(consts.serverUrls['ticketUrl'] % {'ticketId': cell.data().toString()})
+            webbrowser.open(self._parent._app._settings.value('redmineUrl') + 'issues/' + str(cell.data()))
 
     #if the add tickets button is pressed
     def _addTickets(self):
