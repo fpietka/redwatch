@@ -116,7 +116,7 @@ class TaskWindow(QtGui.QMainWindow):
         else:
             newTab = True
             tabNameResult = True
-            while not name or (self.data and self.data['data'].has_key(name)):
+            while not name or (self.data and self.data.has_key(name)):
                 tabNameDResult = QtGui.QInputDialog.getText(self, "Tab name", "Tab name", QtGui.QLineEdit.Normal, "")
                 #typed value
                 name = str(tabNameDResult[0])
@@ -132,7 +132,7 @@ class TaskWindow(QtGui.QMainWindow):
                 if not name:
                     QtGui.QMessageBox.critical(self, "Error", "The tab need a name")
                 #already existing tab
-                elif self.data and self.data['data'].has_key(name):
+                elif self.data and self.data.has_key(name):
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
 
         (orderField, orderWay) = self._getListOrder(name)
