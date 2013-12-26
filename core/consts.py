@@ -4,7 +4,7 @@ import os
 
 # settings infos
 appname = 'redmine-tickets'
-company = 'put-your-company-name-here'
+company = 'nextcode'
 
 rootPath = os.path.join(os.path.dirname(__file__), '..')
 mainIcon = rootPath + '/resources/redmine_fluid_icon.png'
