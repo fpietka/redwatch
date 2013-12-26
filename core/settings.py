@@ -41,7 +41,7 @@ class SystemSettings(QtCore.QSettings):
         super(SystemSettings, self).setValue(key, value)
 
     def dictValue(self, name):
-        if not self.contains(name):
+        if not self.contains(name) or not self.value(name):
             return dict()
         return json.loads(self.value(name))
 
