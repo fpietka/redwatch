@@ -2,7 +2,8 @@
 
 from PyQt4 import QtGui
 from PyQt4.QtGui import QMessageBox
-import webbrowser, re
+import webbrowser
+import re
 from gui.taskstable import TasksTable
 from TasksManagement import TasksManagement
 
@@ -58,7 +59,6 @@ class TasksList(QtGui.QWidget):
 
     def getTable(self):
         return self._table
-
 
     #events methods
 
@@ -131,7 +131,7 @@ class TasksList(QtGui.QWidget):
         settingsCol = self._parent._app._settings.dictValue(type)
         if not settingsCol:
             settingsCol = dict()
-        if settingsCol.has_key(self._name):
+        if self._name in settingsCol:
             settingsCol.pop(self._name)
         settingsCol[self._name] = col
         self._parent._app._settings.setValue(type, settingsCol)

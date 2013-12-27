@@ -22,9 +22,9 @@ class Application(QtGui.QApplication):
         # init the order field and way in the conf
         # XXX might be done in SystemSettings apparently
         if not self._settings.value('defaultTicketsOrderField'):
-            self._settings.setValue('defaultTicketsOrderField', {});
+            self._settings.setValue('defaultTicketsOrderField', {})
         if not self._settings.value('defaultTicketsOrderWay'):
-            self._settings.setValue('defaultTicketsOrderWay', {});
+            self._settings.setValue('defaultTicketsOrderWay', {})
 
         if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
             self.launchSetupWindow()
@@ -58,7 +58,7 @@ class Application(QtGui.QApplication):
     def setLocked(self, locked):
         self._currentlyChecksVersion = locked
 
-    def checkVersionResult(self, title = '', message = ''):
+    def checkVersionResult(self, title='', message=''):
         if title != '' and message != '':
             QtGui.QMessageBox.information(self.widget, title, message)
 

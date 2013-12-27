@@ -18,22 +18,22 @@ versionFile = os.path.join(rootPath, 'VERSION')
 
 # Solarized color theme
 COLORS = (
-        (0, 43, 54),
-        (7, 54, 66),
-        (88, 110, 117),
-        (101, 123, 131),
-        (131, 148, 150),
-        (147, 161, 161),
-        (238, 232, 213),
-        (253, 246, 227),
-        (181, 137, 0),
-        (203, 75, 22),
-        (220, 50, 47),
-        (211, 54, 130),
-        (108, 113, 196),
-        (38, 139, 210),
-        (42, 161, 152),
-        (133, 153, 0)
+    (0, 43, 54),
+    (7, 54, 66),
+    (88, 110, 117),
+    (101, 123, 131),
+    (131, 148, 150),
+    (147, 161, 161),
+    (238, 232, 213),
+    (253, 246, 227),
+    (181, 137, 0),
+    (203, 75, 22),
+    (220, 50, 47),
+    (211, 54, 130),
+    (108, 113, 196),
+    (38, 139, 210),
+    (42, 161, 152),
+    (133, 153, 0)
 )
 
 #settings
@@ -54,6 +54,6 @@ settings['toPutOnlineColor'] = {'value': '#dc322f', 'label': 'To put online Colo
 settings['resolvedColor'] = {'value': '#859900', 'label': 'Resolved Color', 'type': SETTINGS_TYPE_COLOR}  # green
 settings['toTestColor'] = {'value': '#268bd2', 'label': 'To test Color', 'type': SETTINGS_TYPE_COLOR}  # blue
 settings['waitingInfosColor'] = {'value': '#b58900', 'label': 'Waiting infos Color', 'type': SETTINGS_TYPE_COLOR}  # yellow
-settings['newColor'] = {'value': '#2aa198', 'label': 'new Color', 'type': SETTINGS_TYPE_COLOR}  #light blue
+settings['newColor'] = {'value': '#2aa198', 'label': 'new Color', 'type': SETTINGS_TYPE_COLOR}  # light blue
 
 settings['windowResizable'] = {'value': False, 'label': 'Window resizable', 'type': SETTINGS_TYPE_BOOLEAN}

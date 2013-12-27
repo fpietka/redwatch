@@ -1,6 +1,8 @@
 # -*- coding: utf8 -*-
+
 from PyQt4 import QtGui
 import core.consts as consts
+
 
 class ApplicationMenu(QtGui.QMenuBar):
     def __init__(self, window):

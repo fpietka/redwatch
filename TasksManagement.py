@@ -15,8 +15,8 @@ class TasksManagement:
     def addTickets(app, tabName, ticketsToAdd):
         # XXX use thread here
         try:
-            ticketsIds = TasksManagement.getTicketsIds(app);
-            if ticketsIds.has_key(tabName):
+            ticketsIds = TasksManagement.getTicketsIds(app)
+            if tabName in ticketsIds:
                 nbInitTickets = len(ticketsIds[tabName])
             else:
                 ticketsIds[tabName] = []
@@ -35,8 +35,8 @@ class TasksManagement:
 
     @staticmethod
     def purgeTickets(app, tabName=None, removeTab=False):
-        if tabName != None:
-            ticketsIds = TasksManagement.getTicketsIds(app);
+        if tabName is not None:
+            ticketsIds = TasksManagement.getTicketsIds(app)
             if not removeTab:
                 ticketsIds[tabName] = []
             else:
@@ -45,10 +45,9 @@ class TasksManagement:
             ticketsIds = {}
         app._settings.setValue('tickets', ticketsIds)
 
-
     @staticmethod
     def removeTicket(app, tabName, ticketId):
-        ticketsIds = TasksManagement.getTicketsIds(app);
+        ticketsIds = TasksManagement.getTicketsIds(app)
         try:
             ticketsIds[tabName].remove(ticketId)
             app._settings.setValue('tickets', ticketsIds)

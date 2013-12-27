@@ -70,4 +70,3 @@ class SetupWindow(QtGui.QWidget):
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
             self.close()
-

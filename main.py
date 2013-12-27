@@ -11,11 +11,13 @@ import os
 import sys
 import getopt
 
+
 def usage():
     """
     Display script documentation
     """
     print __doc__
+
 
 def main(argv):
     # command-line options

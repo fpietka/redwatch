@@ -10,6 +10,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import core.consts as consts
 
+
 class TasksTableModel(QAbstractTableModel):
     def __init__(self, datain, headerdata, parent=None, *args):
         """ datain: a list of lists
@@ -83,7 +84,7 @@ class TasksTableModel(QAbstractTableModel):
 class TasksTable(QTableView):
 
     def __init__(self, parent, header, data, orderCol, orderWay):
-        super (TasksTable, self).__init__ ()
+        super(TasksTable, self).__init__()
         self._extraHeader = ['delete']
         self._parent = parent
 
@@ -92,7 +93,6 @@ class TasksTable(QTableView):
 
         h = self.horizontalHeader()
         h.setSortIndicator(self._parent._orderCol, self._parent._orderWay)
-
 
     def updateWidth(self):
         appSet = AppSettings()

@@ -16,7 +16,7 @@ from core.settings import SettingsException
 
 
 class WorkerTasks(QtCore.QThread):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         QtCore.QThread.__init__(self, parent)
 
         self._parent = parent
@@ -81,7 +81,6 @@ class CheckVersionThread(QtCore.QThread):
                 message = e.__str__()
 
         self.emit(QtCore.SIGNAL('versionCheck'), title, message)
-
 
     def __del__(self):
         self.wait()

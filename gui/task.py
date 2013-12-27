@@ -36,7 +36,6 @@ class TaskWindow(QtGui.QMainWindow):
         # XXX old method to get ticket data
         #self.setData(data)
 
-
     def displayWindow(self):
         try:
             self._refreshThread = RefreshThread(self)
@@ -104,19 +103,18 @@ class TaskWindow(QtGui.QMainWindow):
         SettingsWindow(self)
 
     def _showAbout(self):
-        QtGui.QMessageBox.information(self, "About", "You use the version %s of the Redmine Tickets Monitor application"
-                % 'beta')
+        QtGui.QMessageBox.information(self, "About", "You use the version %s of the Redmine Tickets Monitor application" % 'beta')
 
     #action to add a tab
     def _addNewTab(self, name=False, data=[], header=[]):
         #if the tabname is not given, then, the user triggered the "add tab" action
         #else, the tab is loaded from the settings
-        if name != False:
+        if name is not False:
             newTab = False
         else:
             newTab = True
             tabNameResult = True
-            while not name or (self.data and self.data.has_key(name)):
+            while not name or (self.data and name in self.data):
                 tabNameDResult = QtGui.QInputDialog.getText(self, "Tab name", "Tab name", QtGui.QLineEdit.Normal, "")
                 #typed value
                 name = str(tabNameDResult[0])
@@ -132,7 +130,7 @@ class TaskWindow(QtGui.QMainWindow):
                 if not name:
                     QtGui.QMessageBox.critical(self, "Error", "The tab need a name")
                 #already existing tab
-                elif self.data and self.data.has_key(name):
+                elif self.data and name in self.data:
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
 
         (orderField, orderWay) = self._getListOrder(name)
@@ -144,12 +142,12 @@ class TaskWindow(QtGui.QMainWindow):
         settingsOrderField = self._app._settings.dictValue('defaultTicketsOrderField')
         settingsOrderWay = self._app._settings.dictValue('defaultTicketsOrderWay')
 
-        if not settingsOrderField.has_key(tabName):
+        if tabName not in settingsOrderField:
             orderField = consts.defaultTicketsOrderField
         else:
             orderField = settingsOrderField[tabName]
 
-        if not settingsOrderWay.has_key(tabName):
+        if tabName not in settingsOrderWay:
             orderWay = consts.defaultTicketsOrderWay
         else:
             orderWay = settingsOrderWay[tabName]
@@ -287,11 +285,11 @@ class TaskWindow(QtGui.QMainWindow):
             if e.key() == QtCore.Qt.Key_PageDown:
                 # change to previous tab
                 if self._tabWidget.currentIndex() < self._tabWidget.count() - 1:
-                    self._tabWidget.setCurrentIndex(self._tabWidget.currentIndex() +1)
+                    self._tabWidget.setCurrentIndex(self._tabWidget.currentIndex() + 1)
             elif e.key() == QtCore.Qt.Key_PageUp:
                 # change to next tab
                 if self._tabWidget.currentIndex() > 0:
-                    self._tabWidget.setCurrentIndex(self._tabWidget.currentIndex() -1)
+                    self._tabWidget.setCurrentIndex(self._tabWidget.currentIndex() - 1)
 
     def notifyChanges(self):
         self.refresh()

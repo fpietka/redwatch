@@ -5,6 +5,7 @@ import core.settings as settings
 import core.consts as consts
 import re
 
+
 class SettingsWindow(QtGui.QDialog):
     def __init__(self, parent):
         QtGui.QWidget.__init__(self, parent)
@@ -29,7 +30,7 @@ class SettingsWindow(QtGui.QDialog):
                 appSettings.value(i)
             )
 
-            if widget != None:
+            if widget is not None:
                 layout.addWidget(label, s, 0)
                 if hasattr(widget, 'widget'):
                     for i, w in enumerate(widget.widget, 1):
@@ -64,7 +65,7 @@ class SettingsWindow(QtGui.QDialog):
 class SettingsFieldFactory:
 
     @staticmethod
-    def createField(window, fieldType, value = ''):
+    def createField(window, fieldType, value=''):
         if fieldType == consts.SETTINGS_TYPE_COLOR:
             field = ColorPickerWidget(value)
         elif fieldType == consts.SETTINGS_TYPE_BOOLEAN:

@@ -16,13 +16,11 @@ class SystemSettings(QtCore.QSettings):
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            cls._instance = super(SystemSettings, cls).__new__(
-                                cls, *args, **kwargs)
+            cls._instance = super(SystemSettings, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
     def __init__(self):
-        super(SystemSettings, self).__init__(self.IniFormat,
-            self.UserScope, consts.company, consts.appname)
+        super(SystemSettings, self).__init__(self.IniFormat, self.UserScope, consts.company, consts.appname)
         self.name = consts.appname
 
     def __getattr__(self, name):
@@ -52,15 +50,14 @@ class AppSettings(object):
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            cls._instance = super(AppSettings, cls).__new__(
-                                cls, *args, **kwargs)
+            cls._instance = super(AppSettings, cls).__new__(cls, *args, **kwargs)
         return cls._instance
 
     def __init__(self):
         self._settings = SystemSettings()
 
     def __getattr__(self, name):
-        if not consts.settings.has_key(name):
+        if name not in consts.settings:
             return None
 
         if self._settings.contains(name):
@@ -77,13 +74,13 @@ class AppSettings(object):
         return self.__getattr__(key)
 
     def label(self, key):
-        if not consts.settings.has_key(key):
+        if key not in consts.settings:
             return None
 
         return consts.settings[key]['label']
 
     def type(self, key):
-        if not consts.settings.has_key(key):
+        if key not in consts.settings:
             return None
 
         return consts.settings[key]['type']

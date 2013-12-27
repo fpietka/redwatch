@@ -13,7 +13,8 @@ python -OO win\setup-win.py py2exe
 # Add the parent directory to python modules search path.
 # This is needed because this build script is in a subdirectory
 # (so "from src import *" won't work without this quirck)
-import sys,os
+import sys
+import os
 sys.path.append(os.path.realpath(os.path.dirname(sys.argv[0]) + '\\..'))
 
 from distutils.core import setup
@@ -31,7 +32,7 @@ if __name__ == "__main__":
                 "dest_base": "RedmineTickets",
             }
         ],
-        options = {
+        options={
             "py2exe": {
                 "optimize": 2,
                 "packages": ["encodings"],

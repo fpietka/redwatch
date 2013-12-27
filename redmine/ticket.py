@@ -20,7 +20,7 @@ class Ticket:
             if 'issue' in issue:
                 formated_issue = issue['issue']
                 for parameter in formated_issue.items():
-                    if type(parameter[1]) is dict and parameter[1].has_key('name'):
+                    if type(parameter[1]) is dict and 'name' in parameter[1]:
                         formated_issue[parameter[0] + '_name'] = parameter[1]['name']
                 # remove some key
                 keys_to_remove = (
@@ -45,7 +45,7 @@ class Ticket:
                 )
                 for key in keys_to_remove:
                     formated_issue.pop(key, None)
-                if not formated_issue.has_key('assigned_to_name'):
+                if 'assigned_to_name' not in formated_issue:
                     formated_issue['assigned_to_name'] = ''
                 results.append(formated_issue)
 
