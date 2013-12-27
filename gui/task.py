@@ -83,15 +83,6 @@ class TaskWindow(QtGui.QMainWindow):
         self._tabWidget.setMovable(True)
         self._tabWidget.currentChanged.connect(self._changeTab)
 
-        """ XXX done on refresh, so no need here?
-        for ticket in self.tickets.iteritems():
-            self._addNewTab(ticket[0])
-        """
-        """
-        for t in self._data:
-            self._addNewTab(t, self._data[t], self._header[t])
-        """
-
         self.setCentralWidget(self._tabWidget)
         self.setStatusBar(QtGui.QStatusBar())
 
