@@ -34,13 +34,13 @@ class Application(QtGui.QApplication):
         sys.exit(self.exec_())
 
     def launchMainWindow(self):
-        self.widget = TaskWindow(self)
         #self.checkVersion(True)
+        self.widget = TaskWindow()
         self.widget.displayWindow()
 
     def launchSetupWindow(self):
         # must belong to the application
-        self._setupWindow = SetupWindow(self)
+        self._setupWindow = SetupWindow()
         self.connect(self._setupWindow, QtCore.SIGNAL('FirstSetupOk'), self.launchMainWindow)
 
     # XXX following code to a thread

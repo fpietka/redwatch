@@ -3,9 +3,9 @@ from redmine.api import Api, ApiException
 
 
 class SetupWindow(QtGui.QWidget):
-    def __init__(self, app):
-        super(SetupWindow, self).__init__()
-        self._app = app
+    def __init__(self, parent=None):
+        super(SetupWindow, self).__init__(parent)
+        self.app = QtGui.QApplication.instance()
         #creation of the UI
         self.initUI()
         self._setWindowInfos()
@@ -56,15 +56,15 @@ class SetupWindow(QtGui.QWidget):
             self._resultLabel.setText("Please provide an API key")
         else:
             try:
-                self._app._settings.setValue('redmineUrl', url)
-                self._app._settings.setValue('redmineApiKey', apikey)
+                self.app._settings.setValue('redmineUrl', url)
+                self.app._settings.setValue('redmineApiKey', apikey)
                 result = Api().statuses()
                 self.emit(QtCore.SIGNAL('FirstSetupOk'))
                 self.close()
             except Exception, e:
                 # empty settings
-                self._app._settings.setValue('redmineUrl', '')
-                self._app._settings.setValue('redmineApiKey', '')
+                self.app._settings.setValue('redmineUrl', '')
+                self.app._settings.setValue('redmineApiKey', '')
                 self._resultLabel.setText(e.message)
 
     def keyPressEvent(self, e):

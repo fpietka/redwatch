@@ -15,11 +15,10 @@ import csv
 
 
 class TaskWindow(QtGui.QMainWindow):
+    def __init__(self, parent=None):
+        super(TaskWindow, self).__init__(parent)
 
-    def __init__(self, app):
-        super(TaskWindow, self).__init__()
-
-        self._app = app
+        self._app = QtGui.QApplication.instance()
 
         #by default the window is displayed, could be moved in conf maybe
         self._displayed = True
