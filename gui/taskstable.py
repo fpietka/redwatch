@@ -63,7 +63,6 @@ class TasksTableModel(QAbstractTableModel):
     def headerData(self, col, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole and len(self.headerdata) > 0:
             return self.headerdata[col]
-        return dict()
 
     def sort(self, Ncol, order):
         """Sort table by given column number.
