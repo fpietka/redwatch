@@ -29,10 +29,12 @@ class SetupWindow(QtGui.QWidget):
 
         urlLabel = QtGui.QLabel('URL')
         self._urlField = QtGui.QLineEdit()
+        self._urlField.setText(self.app._settings.value('redmineUrl'))
         self._urlField.returnPressed.connect(self._saveAction)
 
         apikeyLabel = QtGui.QLabel('API key')
         self._apikeyField = QtGui.QLineEdit()
+        self._apikeyField.setText(self.app._settings.value('redmineApiKey'))
         self._apikeyField.returnPressed.connect(self._saveAction)
 
         saveButton = QtGui.QPushButton('Save')
