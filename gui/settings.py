@@ -41,6 +41,8 @@ class SettingsWindow(QtGui.QDialog):
 
                 self.fields[i] = widget
 
+        self.addStatusesColor(layout, s)
+
         saveButton = QtGui.QPushButton('Save')
         saveButton.clicked.connect(self.saveSettings)
         cancelButton = QtGui.QPushButton('Cancel')
@@ -50,6 +52,19 @@ class SettingsWindow(QtGui.QDialog):
         layout.addWidget(cancelButton, s, 1)
 
         self.setLayout(layout)
+
+    def addStatusesColor(self, layout, position):
+        for status in settings.SystemSettings().value('issue_statuses'):
+            label = QtGui.QLabel(status['name'])
+            widget = SettingsFieldFactory.createField(
+                self,
+                'color'
+                # XXX get previous value
+                #appSettings.value()
+            )
+            layout.addWidget(label, position, 0)
+            layout.addWidget(widget, position, 1)
+            position += 1
 
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
@@ -65,7 +80,7 @@ class SettingsWindow(QtGui.QDialog):
 class SettingsFieldFactory:
 
     @staticmethod
-    def createField(window, fieldType, value=''):
+    def createField(window, fieldType, value=None):
         if fieldType == consts.SETTINGS_TYPE_COLOR:
             field = ColorPickerWidget(value)
         elif fieldType == consts.SETTINGS_TYPE_BOOLEAN:
@@ -98,10 +113,13 @@ class IntWidget(QtGui.QLineEdit):
 
 
 class ColorPickerWidget(QtGui.QPushButton):
-    def __init__(self, value):
+    def __init__(self, value=None):
         super(ColorPickerWidget, self).__init__(value)
 
-        color = map(lambda x: int(str(x), 16), filter(None, re.split(r'\#(\w{2})(\w{2})(\w{2})', value)))
+        if not value:
+            value = '#fdf6e3'
+
+        color = self.to_rgb(str(value))
 
         brightness = ((color[0] * 299) + (color[1] * 587) + (color[2] * 114)) / 1000
         if brightness < 125:
@@ -115,6 +133,12 @@ class ColorPickerWidget(QtGui.QPushButton):
         self.changeColor(QtGui.QColor(value))
 
         self.clicked.connect(self.selectColor)
+
+    def to_rgb(self, color):
+        """
+        Return list of RGB (base 16) values from hexadecimal #rrggbb
+        """
+        return map(lambda x: int(str(x), 16), filter(None, re.split(r'\#(\w{2})(\w{2})(\w{2})', color)))
 
     def selectColor(self):
         colorDial = QtGui.QColorDialog(QtGui.QColor(self._value), self)
