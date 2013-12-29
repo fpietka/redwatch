@@ -5,6 +5,7 @@ from PyQt4 import QtGui, QtCore
 from core.settings import SystemSettings, AppSettings
 from gui.task import TaskWindow
 from gui.setup import SetupWindow
+from redmine.api import Api
 
 
 class Application(QtGui.QApplication):
@@ -29,6 +30,7 @@ class Application(QtGui.QApplication):
         if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
             self.launchSetupWindow()
         else:
+            self.updateStatuses()
             self.launchMainWindow()
 
         sys.exit(self.exec_())
@@ -42,6 +44,9 @@ class Application(QtGui.QApplication):
         # must belong to the application
         self._setupWindow = SetupWindow()
         self.connect(self._setupWindow, QtCore.SIGNAL('FirstSetupOk'), self.launchMainWindow)
+
+    def updateStatuses(self):
+        self._settings.setValue('issue_statuses', Api().statuses()['issue_statuses'])
 
     # XXX following code to a thread
 
