@@ -128,7 +128,7 @@ class TasksList(QtGui.QWidget):
         else:
             self._orderWay = col
 
-        settingsCol = self._parent._app._settings.dictValue(type)
+        settingsCol = self._parent._app._settings.value(type)
         if not settingsCol:
             settingsCol = dict()
         if self._name in settingsCol:

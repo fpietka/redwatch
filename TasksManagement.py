@@ -6,7 +6,7 @@ class TasksManagement:
 
     @staticmethod
     def getTicketsIds(app):
-        settings = app._settings.dictValue('tickets')
+        settings = app._settings.value('tickets')
         if not settings:
             raise SettingsException('No settings found')
         return settings

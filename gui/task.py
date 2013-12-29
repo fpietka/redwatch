@@ -129,8 +129,8 @@ class TaskWindow(QtGui.QMainWindow):
         self._tabWidget.setCurrentIndex(index)
 
     def _getListOrder(self, tabName):
-        settingsOrderField = self._app._settings.dictValue('defaultTicketsOrderField')
-        settingsOrderWay = self._app._settings.dictValue('defaultTicketsOrderWay')
+        settingsOrderField = self._app._settings.value('defaultTicketsOrderField')
+        settingsOrderWay = self._app._settings.value('defaultTicketsOrderWay')
 
         if tabName not in settingsOrderField:
             orderField = consts.defaultTicketsOrderField

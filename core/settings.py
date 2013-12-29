@@ -34,14 +34,23 @@ class SystemSettings(QtCore.QSettings):
         return int(self.value(name).toInt()[0])
 
     def setValue(self, key, value):
-        if type(value) is dict:
-            value = str(json.dumps(value))
+        """
+        Save json data
+        """
+        if type(value) in (dict, list):
+            value = json.dumps(value)
         super(SystemSettings, self).setValue(key, value)
 
-    def dictValue(self, name):
-        if not self.contains(name) or not self.value(name):
-            return dict()
-        return json.loads(self.value(name))
+    def value(self, name):
+        """
+        Try to load json objects from config file
+        """
+        value = super(SystemSettings, self).value(name)
+        if value:
+            try:
+                return json.loads(value)
+            except ValueError:
+                return value
 
 
 class AppSettings(object):
