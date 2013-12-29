@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore
 from core.settings import SystemSettings, AppSettings
 from gui.task import TaskWindow
 from gui.setup import SetupWindow
-from redmine.api import Api
+from redmine.api import Api, ApiException
 
 
 class Application(QtGui.QApplication):
@@ -30,9 +30,11 @@ class Application(QtGui.QApplication):
         if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
             self.launchSetupWindow()
         else:
-            self.updateStatuses()
-            self.launchMainWindow()
-
+            try:
+                self.updateStatuses()
+                self.launchMainWindow()
+            except ApiException:
+                self.launchSetupWindow()
         sys.exit(self.exec_())
 
     def launchMainWindow(self):
