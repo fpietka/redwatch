@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 import core.settings as settings
 import core.consts as consts
 import re
+from math import floor
 
 
 class SettingsWindow(QtGui.QDialog):
@@ -52,6 +53,49 @@ class SettingsWindow(QtGui.QDialog):
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
             self.close()
+
+    def saveSettings(self):
+        appSettings = settings.AppSettings()
+        for i in self.fields:
+            appSettings.setValue(i, self.fields[i].value())
+        self.close()
+
+
+class ColorSettingsWindow(QtGui.QDialog):
+    def __init__(self, parent):
+        QtGui.QWidget.__init__(self, parent)
+        self.initUi()
+        self.setWindowTitle('Color settings')
+        self.show()
+
+    def initUi(self):
+        layout = QtGui.QGridLayout()
+        appSettings = settings.AppSettings()
+        self.position = 0
+        self.fields = {}
+
+        self.addStatusesColor(layout)
+
+        saveButton = QtGui.QPushButton('Save')
+        saveButton.clicked.connect(self.saveSettings)
+        cancelButton = QtGui.QPushButton('Cancel')
+        cancelButton.clicked.connect(self.close)
+
+        layout.addWidget(saveButton, self.position, 0)
+        layout.addWidget(cancelButton, self.position, 1)
+
+        self.setLayout(layout)
+
+    def addStatusesColor(self, layout):
+        for status in settings.SystemSettings().value('issue_statuses'):
+            label = QtGui.QLabel(status['name'])
+            widget = SettingsFieldFactory.createField(
+                self,
+                'color'
+            )
+            self.fields[label] = widget
+            layout.addWidget(widget, floor(self.position / 2), self.position % 2)
+            self.position += 1
 
     def saveSettings(self):
         appSettings = settings.AppSettings()
