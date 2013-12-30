@@ -9,10 +9,8 @@ import re
 class SettingsWindow(QtGui.QDialog):
     def __init__(self, parent):
         QtGui.QWidget.__init__(self, parent)
-
         self.initUi()
         self.setWindowTitle('Settings')
-
         self.show()
 
     def initUi(self):
