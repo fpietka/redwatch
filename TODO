@@ -14,3 +14,5 @@ we can add non existant ticket
 factorize settings objects
 
 handle settings loading errors (in case there are errors in them)
+
+handle tab based on redmine filter and/or specific search
