@@ -39,8 +39,6 @@ class SettingsWindow(QtGui.QDialog):
 
                 self.fields[i] = widget
 
-        self.addStatusesColor(layout, s)
-
         saveButton = QtGui.QPushButton('Save')
         saveButton.clicked.connect(self.saveSettings)
         cancelButton = QtGui.QPushButton('Cancel')
@@ -50,19 +48,6 @@ class SettingsWindow(QtGui.QDialog):
         layout.addWidget(cancelButton, s, 1)
 
         self.setLayout(layout)
-
-    def addStatusesColor(self, layout, position):
-        for status in settings.SystemSettings().value('issue_statuses'):
-            label = QtGui.QLabel(status['name'])
-            widget = SettingsFieldFactory.createField(
-                self,
-                'color'
-                # XXX get previous value
-                #appSettings.value()
-            )
-            layout.addWidget(label, position, 0)
-            layout.addWidget(widget, position, 1)
-            position += 1
 
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
