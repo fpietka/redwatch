@@ -91,7 +91,10 @@ class ColorSettingsWindow(QtGui.QDialog):
             label = QtGui.QLabel(status['name'])
             widget = SettingsFieldFactory.createField(
                 self,
-                'color'
+                'color',
+                # XXX get previous value
+                None,  # appSettings.value()
+                status['name']
             )
             self.fields[label] = widget
             layout.addWidget(widget, floor(self.position / 2), self.position % 2)
@@ -107,9 +110,9 @@ class ColorSettingsWindow(QtGui.QDialog):
 class SettingsFieldFactory:
 
     @staticmethod
-    def createField(window, fieldType, value=None):
+    def createField(window, fieldType, value=None, name=''):
         if fieldType == consts.SETTINGS_TYPE_COLOR:
-            field = ColorPickerWidget(value)
+            field = ColorPickerWidget(value, name)
         elif fieldType == consts.SETTINGS_TYPE_BOOLEAN:
             field = BooleanWidget()
             if value:
@@ -140,9 +143,10 @@ class IntWidget(QtGui.QLineEdit):
 
 
 class ColorPickerWidget(QtGui.QPushButton):
-    def __init__(self, value=None):
+    def __init__(self, value=None, name=''):
         super(ColorPickerWidget, self).__init__(value)
 
+        self.name = name
         if not value:
             value = '#fdf6e3'
 
@@ -176,7 +180,7 @@ class ColorPickerWidget(QtGui.QPushButton):
 
     def changeColor(self, color):
         self._value = color.name()
-        self.setText(color.name())
+        self.setText(self.name)
         palette = QtGui.QPalette()
         palette.setColor(QtGui.QPalette.Button, QtGui.QColor(self._value))
         self.setPalette(palette)
