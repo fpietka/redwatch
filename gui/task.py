@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore
 import core.consts as consts
 from core.workers import WorkerTasks, RefreshThread
 from gui.systemtray import TaskSystemTrayIcon
-from gui.settings import SettingsWindow
+from gui.settings import SettingsWindow, ColorSettingsWindow
 from gui.menu import ApplicationMenu
 from redmine.ticket import Ticket
 from gui.taskslist import TasksList
@@ -91,6 +91,9 @@ class TaskWindow(QtGui.QMainWindow):
 
     def _showSettings(self):
         SettingsWindow(self)
+
+    def _showColorSettings(self):
+        ColorSettingsWindow(self)
 
     def _showAbout(self):
         QtGui.QMessageBox.information(self, "About", "You use the version %s of the Redmine Tickets Monitor application" % 'beta')

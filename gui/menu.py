@@ -40,6 +40,10 @@ class ApplicationMenu(QtGui.QMenuBar):
         showSettingsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), 'Se&ttings', window)
         showSettingsAction.setStatusTip('Open settings window')
         showSettingsAction.triggered.connect(window._showSettings)
+        # color settings window action
+        showColorSettingsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Color settings', window)
+        showColorSettingsAction.setStatusTip('Open color settings window')
+        showColorSettingsAction.triggered.connect(window._showColorSettings)
         #about window action
         showAboutAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&About', window)
         showAboutAction.setStatusTip('Open about window')
@@ -63,5 +67,6 @@ class ApplicationMenu(QtGui.QMenuBar):
 
         appMenu = self.addMenu('&App')
         appMenu.addAction(showSettingsAction)
+        appMenu.addAction(showColorSettingsAction)
         appMenu.addAction(checkVersionAction)
         appMenu.addAction(showAboutAction)
