@@ -150,17 +150,6 @@ class ColorPickerWidget(QtGui.QPushButton):
         if not value:
             value = '#fdf6e3'
 
-        color = self.to_rgb(str(value))
-
-        brightness = ((color[0] * 299) + (color[1] * 587) + (color[2] * 114)) / 1000
-        if brightness < 125:
-            textcolor = "#ffffff"
-        else:
-            textcolor = "#000000"
-
-        self.setObjectName('color-button')
-        self.setStyleSheet('QPushButton#color-button { background: ' + value + '; color: ' + textcolor + '}')
-
         self.changeColor(QtGui.QColor(value))
 
         self.clicked.connect(self.selectColor)
@@ -183,7 +172,19 @@ class ColorPickerWidget(QtGui.QPushButton):
         self.setText(self.name)
         palette = QtGui.QPalette()
         palette.setColor(QtGui.QPalette.Button, QtGui.QColor(self._value))
+
         self.setPalette(palette)
+        # change button style
+        color = self.to_rgb(str(self._value))
+
+        brightness = ((color[0] * 299) + (color[1] * 587) + (color[2] * 114)) / 1000
+        if brightness < 125:
+            textcolor = "#ffffff"
+        else:
+            textcolor = "#000000"
+
+        self.setObjectName('color-button')
+        self.setStyleSheet('QPushButton#color-button { background: ' + self._value + '; color: ' + textcolor + '}')
 
     def value(self):
         return self._value
