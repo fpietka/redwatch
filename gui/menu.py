@@ -53,8 +53,12 @@ class ApplicationMenu(QtGui.QMenuBar):
         checkVersionAction.setStatusTip('Check if a new version is available')
         checkVersionAction.triggered.connect(window._app.checkVersion)
 
-        fileMenu = self.addMenu('&File')
-        fileMenu.addAction(exitAction)
+        appMenu = self.addMenu('&Application')
+        appMenu.addAction(showSettingsAction)
+        appMenu.addAction(showColorSettingsAction)
+        appMenu.addAction(checkVersionAction)
+        appMenu.addAction(showAboutAction)
+        appMenu.addAction(exitAction)
 
         ticketMenu = self.addMenu('&Tabs')
         ticketMenu.addAction(newTabAction)
@@ -64,9 +68,3 @@ class ApplicationMenu(QtGui.QMenuBar):
         ticketMenu.addAction(deleteCurrentTabAction)
         ticketMenu.addSeparator()
         ticketMenu.addAction(purgeTabsAction)
-
-        appMenu = self.addMenu('&Application')
-        appMenu.addAction(showSettingsAction)
-        appMenu.addAction(showColorSettingsAction)
-        appMenu.addAction(checkVersionAction)
-        appMenu.addAction(showAboutAction)
