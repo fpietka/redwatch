@@ -2,7 +2,7 @@
 
 import operator
 
-from core.settings import AppSettings
+from core.settings import SystemSettings
 from PyQt4 import Qt
 #~ from PyQt4.QtCore import QAbstractTableModel
 #~ from PyQt4.QtGui import QTableView
@@ -31,7 +31,7 @@ class TasksTableModel(QAbstractTableModel):
         return 0
 
     def data(self, index, role):
-        appSet = AppSettings()
+        settings = SystemSettings()
 
         # XXX Loop over what is defined in consts for now
         # then over what is in the configuration file
@@ -39,22 +39,13 @@ class TasksTableModel(QAbstractTableModel):
             return None
         elif role == Qt.ForegroundRole:
             if self.arraydata[index.row()]['status_name'] == u'Terminé':
-                return QColor(appSet.closedColor)
-            else:
-                return QColor(appSet.standardForegroundColor)
+                return QColor(settings.closedColor)
         elif role == Qt.BackgroundRole:
-            if self.arraydata[index.row()]['status_name'] == u'A déployer':
-                return QColor(appSet.toPutOnlineColor)
-            elif self.arraydata[index.row()]['status_name'] in (u'Garantie', u'Résolu'):
-                return QColor(appSet.resolvedColor)
-            elif self.arraydata[index.row()]['status_name'] == u'Recette':
-                return QColor(appSet.toTestColor)
-            elif self.arraydata[index.row()]['status_name'] == u'Cadrage Tech':
-                return QColor(appSet.waitingInfosColor)
-            elif self.arraydata[index.row()]['status_name'] == '':
-                return QColor(appSet.newColor)
+            status_name = self.arraydata[index.row()]['status_name']
+            if status_name in settings.value('status_colors'):
+                return QColor(settings.value('status_colors')[status_name])
             else:
-                return QColor(appSet.standardBackgroundColor)
+                return QColor('#fdf6e3')
         elif role != Qt.DisplayRole:
             return None
 
@@ -94,14 +85,14 @@ class TasksTable(QTableView):
         h.setSortIndicator(self._parent._orderCol, self._parent._orderWay)
 
     def updateWidth(self):
-        appSet = AppSettings()
+        settings = SystemSettings()
         index = 0
         width = 0
         while self.columnWidth(index) > 0:
             width += self.columnWidth(index) + self.columnSpan(0, index)
             index += 1
 
-        if not appSet.windowResizable:
+        if not settings.value('windowResizable'):
             self.setFixedWidth(width)
 
         return self.width()
