@@ -3,8 +3,8 @@ import sys
 from PyQt4 import QtGui, QtCore
 #from core.workers import CheckVersionThread
 from core.settings import SystemSettings, AppSettings
+from gui.settings import SetupWindow
 from gui.task import TaskWindow
-from gui.setup import SetupWindow
 from redmine.api import Api, ApiException
 
 
