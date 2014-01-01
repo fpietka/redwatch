@@ -14,17 +14,17 @@ class ApplicationMenu(QtGui.QMenuBar):
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(QtGui.qApp.quit)
         #new tab action
-        newTabAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&New', window)
+        newTabAction = QtGui.QAction(QtGui.QIcon(), '&New', window)
         newTabAction.setStatusTip('Create new tab')
         newTabAction.setShortcut('Ctrl+N')
         newTabAction.triggered.connect(window._addNewTab)
         #save current tab action
-        saveCurrentTabAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Save current', window)
+        saveCurrentTabAction = QtGui.QAction(QtGui.QIcon(), '&Save current', window)
         saveCurrentTabAction.setStatusTip('Save current tab to CSV')
         saveCurrentTabAction.setShortcut('Ctrl+S')
         saveCurrentTabAction.triggered.connect(window._saveTab)
         #delete current tab action
-        deleteCurrentTabAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Delete current', window)
+        deleteCurrentTabAction = QtGui.QAction(QtGui.QIcon(), '&Delete current', window)
         deleteCurrentTabAction.setStatusTip('Delete current tab')
         deleteCurrentTabAction.triggered.connect(window._deleteTab)
         deleteCurrentTabAction.setShortcut('Ctrl+W')
@@ -37,19 +37,19 @@ class ApplicationMenu(QtGui.QMenuBar):
         purgeTabsAction.setStatusTip('Delete all tabs')
         purgeTabsAction.triggered.connect(window._purgeTabs)
         #settings window action
-        showSettingsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), 'Se&ttings', window)
+        showSettingsAction = QtGui.QAction(QtGui.QIcon(consts.settingsIcon), 'Se&ttings', window)
         showSettingsAction.setStatusTip('Open settings window')
         showSettingsAction.triggered.connect(window._showSettings)
         # color settings window action
-        showColorSettingsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Color settings', window)
+        showColorSettingsAction = QtGui.QAction(QtGui.QIcon(consts.colorSettingsIcon), '&Color settings', window)
         showColorSettingsAction.setStatusTip('Open color settings window')
         showColorSettingsAction.triggered.connect(window._showColorSettings)
         #about window action
-        showAboutAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&About', window)
+        showAboutAction = QtGui.QAction(QtGui.QIcon(), '&About', window)
         showAboutAction.setStatusTip('Open about window')
         showAboutAction.triggered.connect(window._showAbout)
         #about window action
-        checkVersionAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), 'Check &version', window)
+        checkVersionAction = QtGui.QAction(QtGui.QIcon(consts.mainIcon), 'Check &version', window)
         checkVersionAction.setStatusTip('Check if a new version is available')
         checkVersionAction.triggered.connect(window._app.checkVersion)
 

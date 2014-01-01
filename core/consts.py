@@ -8,8 +8,11 @@ company = 'nextcode'
 
 rootPath = os.path.join(os.path.dirname(__file__), '..')
 mainIcon = rootPath + '/resources/redmine_fluid_icon.png'
-exitIcon = rootPath + '/resources/redmine_fluid_icon.png'
+exitIcon = rootPath + '/resources/glyphicons_388_exit.png'
 purgeIcon = rootPath + '/resources/redmine_fluid_icon.png'
+
+settingsIcon= rootPath + '/resources/glyphicons_280_settings.png'
+colorSettingsIcon = rootPath + '/resources/glyphicons_092_tint.png'
 
 defaultTicketsOrderField = 0
 defaultTicketsOrderWay = 1
