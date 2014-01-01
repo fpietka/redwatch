@@ -65,7 +65,7 @@ class ApplicationMenu(QtGui.QMenuBar):
         ticketMenu.addSeparator()
         ticketMenu.addAction(purgeTabsAction)
 
-        appMenu = self.addMenu('&App')
+        appMenu = self.addMenu('&Application')
         appMenu.addAction(showSettingsAction)
         appMenu.addAction(showColorSettingsAction)
         appMenu.addAction(checkVersionAction)
