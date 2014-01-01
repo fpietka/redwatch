@@ -88,13 +88,13 @@ class ColorSettingsWindow(QtGui.QDialog):
         self.setLayout(layout)
 
     def addStatusesColor(self, layout):
-        for status in settings.SystemSettings().value('issue_statuses'):
+        sysSettings = settings.SystemSettings()
+        for status in sysSettings.value('issue_statuses'):
             label = QtGui.QLabel(status['name'])
             widget = SettingsFieldFactory.createField(
                 self,
                 'color',
-                # XXX get previous value
-                None,  # appSettings.value()
+                sysSettings.value('status_colors')[status['name']],
                 status['name']
             )
             self.fields[label] = widget
@@ -102,9 +102,11 @@ class ColorSettingsWindow(QtGui.QDialog):
             self.position += 1
 
     def saveSettings(self):
-        appSettings = settings.AppSettings()
-        for i in self.fields:
-            appSettings.setValue(i, self.fields[i].value())
+        sysSettings = settings.SystemSettings()
+        colors = dict()
+        for field in self.fields:
+            colors[field.text()] = self.fields[field].value()
+        sysSettings.setValue('status_colors', colors)
         self.close()
 
 
