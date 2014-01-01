@@ -1,1 +1,1 @@
-__all__ = ["application", "auth", "menu", "setup", "task"]
+__all__ = ["application", "auth", "menu", "settings", "task"]
