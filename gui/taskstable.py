@@ -87,9 +87,9 @@ class TasksTable(QTableView):
     def updateWidth(self):
         settings = SystemSettings()
         index = 0
-        width = 0
+        width = self.columnSpan(0, 0) * 2
         while self.columnWidth(index) > 0:
-            width += self.columnWidth(index) + self.columnSpan(0, index)
+            width += self.columnWidth(index)
             index += 1
 
         if not settings.value('windowResizable'):
