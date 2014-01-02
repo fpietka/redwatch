@@ -131,6 +131,7 @@ class SetupWindow(QtGui.QWidget):
         self.move((resolution.width() / 2) - (self.frameSize().width() / 2),
                   (resolution.height() / 2) - (self.frameSize().height() / 2))
         self.setWindowTitle('Initial setup')
+        self.setWindowIcon(QtGui.QIcon(consts.mainIcon))
 
     def initUI(self):
         layout = QtGui.QGridLayout()
