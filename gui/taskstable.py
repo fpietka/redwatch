@@ -42,7 +42,7 @@ class TasksTableModel(QAbstractTableModel):
                 return QColor(settings.closedColor)
         elif role == Qt.BackgroundRole:
             status_name = self.arraydata[index.row()]['status_name']
-            if status_name in settings.value('status_colors'):
+            if settings.value('status_colors') and status_name in settings.value('status_colors'):
                 return QColor(settings.value('status_colors')[status_name])
             else:
                 return QColor('#fdf6e3')

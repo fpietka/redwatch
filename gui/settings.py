@@ -91,10 +91,14 @@ class ColorSettingsWindow(QtGui.QDialog):
         sysSettings = settings.SystemSettings()
         for status in sysSettings.value('issue_statuses'):
             label = QtGui.QLabel(status['name'])
+            if sysSettings.value('status_colors'):
+                color = sysSettings.value('status_colors')[status['name']]
+            else:
+                color = None
             widget = SettingsFieldFactory.createField(
                 self,
                 'color',
-                sysSettings.value('status_colors')[status['name']],
+                color,
                 status['name']
             )
             self.fields[label] = widget
