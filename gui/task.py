@@ -218,7 +218,6 @@ class TaskWindow(QtGui.QMainWindow):
         tableWidth = 0
         if (currentTab):
             tableWidth = currentTab.getTable().width()
-
         #the width must be changed only if the table is not empty
         if tableWidth > 0:
             if not self._app._appSettings.windowResizable:

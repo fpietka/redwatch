@@ -91,7 +91,6 @@ class TasksTable(QTableView):
         while self.columnWidth(index) > 0:
             width += self.columnWidth(index)
             index += 1
-
         if not settings.value('windowResizable'):
             self.setFixedWidth(width)
 
