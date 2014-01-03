@@ -249,6 +249,7 @@ class TaskWindow(QtGui.QMainWindow):
                 self._addNewTab(tab, data, header)
 
         self.displayMessage()
+        self.setWidth()
 
     #refresh the display
     def refresh(self):
