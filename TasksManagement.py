@@ -6,10 +6,10 @@ class TasksManagement:
 
     @staticmethod
     def getTicketsIds(app):
-        settings = app._settings.value('tickets')
-        if not settings:
-            raise SettingsException('No settings found')
-        return settings
+        tickets = app._settings.value('tickets')
+        if not tickets:
+            tickets = dict()
+        return tickets
 
     @staticmethod
     def addTickets(app, tabName, ticketsToAdd):

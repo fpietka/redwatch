@@ -41,10 +41,7 @@ class RefreshThread(QtCore.QThread):
 
     def run(self):
         # get data asynchronously
-        try:
-            tabs = TasksManagement.getTicketsIds(self._parent._app)
-        except SettingsException:
-            tabs = dict()
+        tabs = TasksManagement.getTicketsIds(self._parent._app)
         data = dict()
         for tab, tickets in tabs.iteritems():
             data[tab] = Ticket.getTickets(tickets)
