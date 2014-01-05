@@ -81,6 +81,12 @@ class TasksTable(QTableView):
         self.setSortingEnabled(True)
         self.setData(data, header)
 
+        # hide vertical header
+        self.verticalHeader().setVisible(False)
+        #self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+
+        self.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
+
         h = self.horizontalHeader()
         h.setSortIndicator(self._parent._orderCol, self._parent._orderWay)
 
@@ -110,13 +116,7 @@ class TasksTable(QTableView):
             self.model().sort(self._parent._orderCol, self._parent._orderWay)
         except IndexError:
             pass
-        # hide vertical header
-        self.verticalHeader().setVisible(False)
-        #self.horizontalHeader().setResizeMode(QHeaderView.Stretch)
-        self.horizontalHeader().setResizeMode(QHeaderView.ResizeToContents)
 
-        # set the minimum size
-        #~ self.resizeColumnsToContents()
         self.updateWidth()
 
     def getData(self, row, col):
