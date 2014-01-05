@@ -85,15 +85,15 @@ class TasksTable(QTableView):
         h.setSortIndicator(self._parent._orderCol, self._parent._orderWay)
 
     def updateWidth(self):
-        settings = SystemSettings()
-        index = 0
-        width = self.columnSpan(0, 0) * 2
-        while self.columnWidth(index) > 0:
-            width += self.columnWidth(index)
-            index += 1
-        if not settings.value('windowResizable'):
-            self.setFixedWidth(width)
-
+        if len(self.model().arraydata) > 0:
+            settings = SystemSettings()
+            index = 0
+            width = self.columnSpan(0, 0) * 2
+            while self.columnWidth(index) > 0:
+                width += self.columnWidth(index)
+                index += 1
+            if not settings.value('windowResizable'):
+                self.setFixedWidth(width)
         return self.width()
 
     def setData(self, data, header):

@@ -3,6 +3,7 @@
 from PyQt4 import QtGui, QtCore
 
 import core.consts as consts
+from core.settings import SystemSettings
 from core.workers import WorkerTasks, RefreshThread
 from gui.systemtray import TaskSystemTrayIcon
 from gui.settings import SettingsWindow, ColorSettingsWindow
