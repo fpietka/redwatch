@@ -89,6 +89,7 @@ class TasksTable(QTableView):
 
         h = self.horizontalHeader()
         h.setSortIndicator(self._parent._orderCol, self._parent._orderWay)
+        self.updateWidth()
 
     def updateWidth(self):
         if len(self.model().arraydata) > 0:
