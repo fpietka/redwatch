@@ -22,7 +22,11 @@ class WorkerTasks(QtCore.QThread):
         self._parent = parent
         self.exiting = False
 
-        self.interval = float(self._parent._appSettings.refresh_interval)
+        interval = self._parent._settings.value('refresh_interval')
+        if not interval:
+            self.interval = 60
+        else:
+            self.interval = float(interval)
 
     def __del__(self):
         self.exiting = True
