@@ -42,6 +42,8 @@ class TaskWindow(QtGui.QMainWindow):
         self.thread = WorkerTasks(self._app)
         self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.notifyChanges)
         self.thread.start()
+        # connect refresh signal
+        self.connect(self._refreshThread, QtCore.SIGNAL('refreshEnds'), self.updateData)
         #creation of the system tray icon
         self._setSystemTrayIcon()
         #creation fo the window
@@ -230,6 +232,11 @@ class TaskWindow(QtGui.QMainWindow):
             self.header[t] = dataRow['header']
             self.data[t] = dataRow['data']
 
+    #refresh the display
+    def refresh(self):
+        self.displayMessage('refreshing tabs ...')
+        self._refreshThread.start()
+
     def updateData(self):
         # refresh existing tabs name
         tabs = dict()
@@ -248,12 +255,6 @@ class TaskWindow(QtGui.QMainWindow):
 
         self.displayMessage()
         self.setWidth()
-
-    #refresh the display
-    def refresh(self):
-        self.displayMessage('refreshing tabs ...')
-        self.connect(self._refreshThread, QtCore.SIGNAL('refreshEnds'), self.updateData)
-        self._refreshThread.start()
 
     #event methods
 
