@@ -37,14 +37,11 @@ class TaskWindow(QtGui.QMainWindow):
         #self.setData(data)
 
     def displayWindow(self):
-        try:
-            self._refreshThread = RefreshThread(self)
-            # XXX init refresh thread that will trigger refresh itself
-            self.thread = WorkerTasks(self._app)
-            self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.notifyChanges)
-            self.thread.start()
-        except Exception, e:
-            print('Unable to init Thread')
+        self._refreshThread = RefreshThread(self)
+        # XXX init refresh thread that will trigger refresh itself
+        self.thread = WorkerTasks(self._app)
+        self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.notifyChanges)
+        self.thread.start()
         #creation of the system tray icon
         self._setSystemTrayIcon()
         #creation fo the window
