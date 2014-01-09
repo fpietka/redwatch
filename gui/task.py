@@ -238,6 +238,11 @@ class TaskWindow(QtGui.QMainWindow):
         self.displayMessage('refreshing tabs ...')
         self._refreshThread.start()
 
+    def removeTicket(self, tab, ticket):
+        key = (key for key, item in enumerate(self.data[tab]['data']) if item['id'] == ticket).next()
+        self.data[tab]['data'].pop(key)
+        self.updateData(tab)
+
     def updateData(self):
         # refresh existing tabs name
         tabs = dict()

@@ -82,7 +82,7 @@ class TasksList(QtGui.QWidget):
             if not TasksManagement.removeTicket(self._parent._app, self._name, ticketIdToRemove):
                 self._parent.displayMessage('An error occured...')
             else:
-                self._parent.refresh()
+                self._parent.removeTicket(self._name, ticketIdToRemove)
                 self._parent.displayMessage('Ticket deleted')
 
     #if a cell is double clicked
