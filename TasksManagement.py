@@ -25,13 +25,16 @@ class TasksManagement:
             # XXX for now
             ticketsIds = {tabName: list()}
 
+        # quick count for now
+        # XXX will have to count only valid ticket added
+        before = len(ticketsIds[tabName])
         for ticket in ticketsToAdd:
             ticketsIds[tabName].append(ticket)
 
         ticketsIds[tabName] = sorted(set(ticketsIds[tabName]))
         app._settings.setValue('tickets', ticketsIds)
 
-        return len(ticketsIds[tabName])
+        return len(ticketsIds[tabName]) - before
 
     @staticmethod
     def purgeTickets(app, tabName=None, removeTab=False):
