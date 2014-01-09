@@ -47,8 +47,16 @@ class RefreshThread(QtCore.QThread):
         # get data asynchronously
         tabs = TasksManagement.getTicketsIds(self._parent._app)
         data = dict()
-        for tab, tickets in tabs.iteritems():
-            data[tab] = Ticket.getTickets(tickets)
+        try:
+            for tab, tickets in tabs.iteritems():
+                tabTickets = Ticket.getTickets(tickets)
+                if tab in self._parent.data:
+                    data[tab] = dict(self._parent.data[tab].items() + tabTickets.items())
+                else:
+                    data[tab] = tabTickets
+        except:
+            self._parent.message = "Error: unable to connect"
+
         self._parent.data = data
         self.emit(QtCore.SIGNAL('refreshEnds'))
 
