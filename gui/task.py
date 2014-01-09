@@ -243,7 +243,7 @@ class TaskWindow(QtGui.QMainWindow):
         self.data[tab]['data'].pop(key)
         self.updateData(tab)
 
-    def updateData(self):
+    def updateData(self, tab=None):
         # refresh existing tabs name
         tabs = dict()
         nbTabs = self._tabWidget.count()
@@ -251,14 +251,16 @@ class TaskWindow(QtGui.QMainWindow):
             tabName = str(self._tabWidget.tabText(i))
             tabs[tabName] = self._tabWidget.widget(i)
         # refresh or create tabs
-        for tab, data in self.data.iteritems():
-            header = data['header']
-            data = data['data']
-            if tab in tabs:
-                tabs[tab].setData(data, header)
-            else:
-                self._addNewTab(tab, data, header)
-
+        if tab and tab in tabs:
+            tabs[tab].setData(self.data[tab]['data'], self.data[tab]['header'])
+        elif not tab:
+            for tab, data in self.data.iteritems():
+                header = data['header']
+                data = data['data']
+                if tab in tabs:
+                    tabs[tab].setData(data, header)
+                else:
+                    self._addNewTab(tab, data, header)
         self.displayMessage()
         self.setWidth()
 
