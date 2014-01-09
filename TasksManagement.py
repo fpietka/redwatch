@@ -52,6 +52,7 @@ class TasksManagement:
     def removeTicket(app, tabName, ticketId):
         ticketsIds = TasksManagement.getTicketsIds(app)
         try:
+            # Remove ticket from config
             ticketsIds[tabName].remove(ticketId)
             app._settings.setValue('tickets', ticketsIds)
             return True
