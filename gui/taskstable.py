@@ -135,4 +135,4 @@ class TasksTable(QTableView):
         return self._header.index(colName)
 
     def keyPressEvent(self, e):
-        self._parent.keyPressEvent(e)
+        super(TasksTable, self).keyPressEvent(e)
