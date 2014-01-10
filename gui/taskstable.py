@@ -137,3 +137,7 @@ class TasksTable(QTableView):
 
     def keyPressEvent(self, e):
         super(TasksTable, self).keyPressEvent(e)
+        if e.key() == Qt.Key_Delete:
+            for index in self.selectedIndexes():
+                if self.getColumnNameFromIndex(index.column()) == 'id':
+                    self._parent._parent.removeTicket(self._parent._name, index.data())
