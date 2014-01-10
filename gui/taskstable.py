@@ -78,6 +78,7 @@ class TasksTable(QTableView):
         self._extraHeader = ['delete']
         self._parent = parent
 
+        self.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.setSortingEnabled(True)
         self.setData(data, header)
 
