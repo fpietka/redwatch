@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 
+import csv
+
 from PyQt4 import QtGui, QtCore
 
 import core.consts as consts
@@ -12,24 +14,18 @@ from redmine.ticket import Ticket
 from gui.taskslist import TasksList
 from TasksManagement import TasksManagement
 
-import csv
-
 
 class TaskWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
         super(TaskWindow, self).__init__(parent)
-
         self._app = QtGui.QApplication.instance()
 
         #by default the window is displayed, could be moved in conf maybe
         self._displayed = True
 
-        #at the creation of the widget, the tickets list is fetched and
-        #saved in the object
-
-        """ticket list by tab"""
+        # ticket list by tab
         self.tickets = dict()
-        """data for tickets"""
+        # data for tickets
         # XXX empty for now, should be filled by a refresh
         self.data = dict()
 
@@ -62,10 +58,6 @@ class TaskWindow(QtGui.QMainWindow):
     #creation of the system tray icon
     def _setSystemTrayIcon(self):
         self._trayIcon = TaskSystemTrayIcon(QtGui.QIcon(consts.mainIcon), self, self._app)
-
-    #creation of the system tray icon
-    def systemTrayIcon(self):
-        return self._trayIcon
 
     #method which create the UI
     def _create(self):

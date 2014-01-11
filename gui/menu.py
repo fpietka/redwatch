@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 from PyQt4 import QtGui
+
 import core.consts as consts
 
 
@@ -48,15 +49,10 @@ class ApplicationMenu(QtGui.QMenuBar):
         showAboutAction = QtGui.QAction(QtGui.QIcon(), '&About', window)
         showAboutAction.setStatusTip('Open about window')
         showAboutAction.triggered.connect(window._showAbout)
-        #about window action
-        checkVersionAction = QtGui.QAction(QtGui.QIcon(consts.mainIcon), 'Check &version', window)
-        checkVersionAction.setStatusTip('Check if a new version is available')
-        checkVersionAction.triggered.connect(window._app.checkVersion)
 
         appMenu = self.addMenu('&Application')
         appMenu.addAction(showSettingsAction)
         appMenu.addAction(showColorSettingsAction)
-        appMenu.addAction(checkVersionAction)
         appMenu.addAction(showAboutAction)
         appMenu.addAction(exitAction)
 

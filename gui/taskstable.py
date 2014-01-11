@@ -72,7 +72,6 @@ class TasksTableModel(QAbstractTableModel):
 
 
 class TasksTable(QTableView):
-
     def __init__(self, parent, header, data, orderCol, orderWay):
         super(TasksTable, self).__init__()
         self._extraHeader = ['delete']
