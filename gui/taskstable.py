@@ -74,7 +74,6 @@ class TasksTableModel(QAbstractTableModel):
 class TasksTable(QTableView):
     def __init__(self, parent, header, data, orderCol, orderWay):
         super(TasksTable, self).__init__()
-        self._extraHeader = ['delete']
         self._parent = parent
 
         self.setSelectionBehavior(QAbstractItemView.SelectRows)
@@ -106,11 +105,6 @@ class TasksTable(QTableView):
 
     def setData(self, data, header):
         self.setHeader(header)
-
-        # XXX might want to trigger that to refresh content
-        for row in data:
-            row['delete'] = 'delete Row'
-
         # set the table model
         tm = TasksTableModel(data, self._header, self._parent)
         self.setModel(tm)
@@ -126,7 +120,7 @@ class TasksTable(QTableView):
         return self.model().arraydata[row][self.model().headerData(col)]
 
     def setHeader(self, header):
-        self._header = header + self._extraHeader
+        self._header = header
 
     def getColumnNameFromIndex(self, colIndex):
         return self.model().headerData(colIndex)
