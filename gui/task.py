@@ -19,10 +19,6 @@ class TaskWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
         super(TaskWindow, self).__init__(parent)
         self._app = QtGui.QApplication.instance()
-
-        #by default the window is displayed, could be moved in conf maybe
-        self._displayed = True
-
         # ticket list by tab
         self.tickets = dict()
         # data for tickets
@@ -265,12 +261,10 @@ class TaskWindow(QtGui.QMainWindow):
     def _show(self):
         self._trayIcon.show()
         self.show()
-        self._displayed = True
 
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
             self.hide()
-            self._displayed = False
         elif e.key() == QtCore.Qt.Key_F5:
             self.refresh()
         elif e.modifiers() == QtCore.Qt.ControlModifier:

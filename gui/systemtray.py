@@ -28,10 +28,6 @@ class TaskSystemTrayIcon(QtGui.QSystemTrayIcon):
     def showApp(self, reason):
         if reason != QtGui.QSystemTrayIcon.Trigger:
             return
-
-        if not self._widget._displayed:
-            self._widget.show()
-            self._widget._displayed = True
-        else:
-            self._widget.hide()
-            self._widget._displayed = False
+        self._widget.hide()
+        self._widget.show()
+        self._widget.activateWindow()
