@@ -16,3 +16,13 @@ factorize settings objects
 handle settings loading errors (in case there are errors in them)
 
 handle tab based on redmine filter and/or specific search
+
+---
+
+Handle versions:
+
+use tag objects:
+curl -i https://api.github.com/repos/:user/:repo/tags
+and parse dates
+maybe use a naming convention for stable and beta releases, and up to master
+then download tar.gz to update itself
