@@ -21,8 +21,8 @@ def usage():
 
 def main(argv):
     # command-line options
-    shortOptions = 'v:'
-    longOptions = ('verbose')
+    shortOptions = 'd:'
+    longOptions = ('debug')
 
     # handle command-line parameters
     try:
@@ -31,12 +31,12 @@ def main(argv):
         usage()
         sys.exit(1)
 
+    debug = False
     for opt, arg in options:
-        if opt in ('-v', '--verbose'):
-            global verbose
-            verbose = True
+        if opt in ('-d', '--debug'):
+            debug = True
 
-    app = Application()
+    app = Application(debug)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

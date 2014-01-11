@@ -12,7 +12,7 @@ from redmine.api import Api, ApiException
 
 class Application(QtGui.QApplication):
 
-    def __init__(self):
+    def __init__(self, debug=False):
         super(Application, self).__init__(sys.argv)
 
         # loads some settings
