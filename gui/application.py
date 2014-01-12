@@ -19,13 +19,6 @@ class Application(QtGui.QApplication):
         self._settings = SystemSettings()
         self._appSettings = AppSettings()
 
-        # init the order field and way in the conf
-        # XXX might be done in SystemSettings apparently
-        if not self._settings.value('defaultTicketsOrderField'):
-            self._settings.setValue('defaultTicketsOrderField', {})
-        if not self._settings.value('defaultTicketsOrderWay'):
-            self._settings.setValue('defaultTicketsOrderWay', {})
-
         if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
             self.launchSetupWindow()
         else:

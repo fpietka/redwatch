@@ -123,12 +123,12 @@ class TaskWindow(QtGui.QMainWindow):
         settingsOrderField = self._app._settings.value('defaultTicketsOrderField')
         settingsOrderWay = self._app._settings.value('defaultTicketsOrderWay')
 
-        if tabName not in settingsOrderField:
+        if not settingsOrderField or tabName not in settingsOrderField:
             orderField = consts.defaultTicketsOrderField
         else:
             orderField = settingsOrderField[tabName]
 
-        if tabName not in settingsOrderWay:
+        if not settingsOrderWay or tabName not in settingsOrderWay:
             orderWay = consts.defaultTicketsOrderWay
         else:
             orderWay = settingsOrderWay[tabName]
