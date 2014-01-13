@@ -25,24 +25,16 @@ class TaskWindow(QtGui.QMainWindow):
         # XXX empty for now, should be filled by a refresh
         self.data = dict()
 
-        # XXX old method to get ticket data
-        #self.setData(data)
-
     def displayWindow(self):
         self._refreshThread = RefreshThread(self)
         # XXX init refresh thread that will trigger refresh itself
         self.thread = WorkerTasks(self._app)
         self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.notifyChanges)
         self.thread.start()
-        # connect refresh signal
         self.connect(self._refreshThread, QtCore.SIGNAL('refreshEnds'), self.updateData)
-        #creation of the system tray icon
         self._setSystemTrayIcon()
-        #creation fo the window
         self._create()
-        #definition if window informations (size, position, title)
         self._setWindowInfos()
-        #display the Whole Thing
         self._show()
 
         self.refresh()
@@ -51,11 +43,9 @@ class TaskWindow(QtGui.QMainWindow):
     def __del__(self):
         self.thread.stop()
 
-    #creation of the system tray icon
     def _setSystemTrayIcon(self):
         self._trayIcon = TaskSystemTrayIcon(QtGui.QIcon(consts.mainIcon), self, self._app)
 
-    #method which create the UI
     def _create(self):
         #shape of the window:
         #A Widget which contains all the elements
@@ -86,7 +76,6 @@ class TaskWindow(QtGui.QMainWindow):
     def _showAbout(self):
         QtGui.QMessageBox.information(self, "About", "You use the version %s of the Redmine Tickets Monitor application" % 'beta')
 
-    #action to add a tab
     def _addNewTab(self, name=False, data=[], header=[]):
         #if the tabname is not given, then, the user triggered the "add tab" action
         #else, the tab is loaded from the settings
@@ -99,23 +88,18 @@ class TaskWindow(QtGui.QMainWindow):
                 tabNameDResult = QtGui.QInputDialog.getText(self, "Tab name", "Tab name", QtGui.QLineEdit.Normal, "")
                 #typed value
                 name = str(tabNameDResult[0])
-
                 #true if "ok", false if "cancel" or escape
                 tabNameResult = tabNameDResult[1]
-
                 #if user cancelled the prompt, the action is stopped
                 if not tabNameResult:
                     return
-
                 #empty tab name
                 if not name:
                     QtGui.QMessageBox.critical(self, "Error", "The tab need a name")
                 #already existing tab
                 elif self.data and name in self.data:
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
-
         (orderField, orderWay) = self._getListOrder(name)
-
         index = self._tabWidget.addTab(TasksList(self, name, data, header, orderField, orderWay), name)
         self._tabWidget.setCurrentIndex(index)
 
@@ -202,8 +186,6 @@ class TaskWindow(QtGui.QMainWindow):
     #the width depends on the table width
     def setWidth(self):
         currentTab = self._tabWidget.currentWidget()
-
-        # XXX tableWidth is too small when windowResizable is False
         if (currentTab):
             tableWidth = currentTab.getTable().width()
             #the width must be changed only if the table is not empty
