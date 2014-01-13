@@ -36,6 +36,7 @@ class Ticket:
                     'description',
                     'updated_on',
                     'done_ratio',
+                    'due_date',
 
                     'tracker_name',
                     'category_name',
