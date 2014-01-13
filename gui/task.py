@@ -26,12 +26,13 @@ class TaskWindow(QtGui.QMainWindow):
         self.data = dict()
 
     def displayWindow(self):
-        self._refreshThread = RefreshThread(self)
-        # XXX init refresh thread that will trigger refresh itself
-        self.thread = WorkerTasks(self._app)
-        self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.refresh)
-        self.thread.start()
-        self.connect(self._refreshThread, QtCore.SIGNAL('refreshEnds'), self.updateData)
+        self.threads = {
+            'refresh_trigger': WorkerTasks(self._app),
+            'refresh_signal': RefreshThread(self)
+        }
+        self.connect(self.threads['refresh_trigger'], QtCore.SIGNAL('refreshSignal'), self.refresh)
+        self.threads['refresh_trigger'].start()
+        self.connect(self.threads['refresh_signal'], QtCore.SIGNAL('refreshEnds'), self.updateData)
         self._setSystemTrayIcon()
         self._create()
         self._setWindowInfos()
@@ -39,9 +40,10 @@ class TaskWindow(QtGui.QMainWindow):
 
         self.refresh()
 
-    # stop the thread if the window is closed
     def __del__(self):
-        self.thread.stop()
+        # stop running threads
+        for thread in self.threads:
+            thread.stop()
 
     def _setSystemTrayIcon(self):
         self._trayIcon = TaskSystemTrayIcon(QtGui.QIcon(consts.mainIcon), self, self._app)
@@ -206,7 +208,7 @@ class TaskWindow(QtGui.QMainWindow):
     #refresh the display
     def refresh(self):
         self.displayMessage('refreshing tabs ...')
-        self._refreshThread.start()
+        self.threads['refresh_signal'].start()
 
     def removeTicket(self, tab, ticket):
         key = (key for key, item in enumerate(self.data[tab]['data']) if item['id'] == ticket).next()
