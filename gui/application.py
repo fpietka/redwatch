@@ -15,9 +15,7 @@ class Application(QtGui.QApplication):
     def __init__(self, debug=False):
         super(Application, self).__init__(sys.argv)
 
-        # loads some settings
         self._settings = SystemSettings()
-        self._appSettings = AppSettings()
 
         if not self._settings.value('redmineUrl') or not self._settings.value('redmineApiKey'):
             self.launchSetupWindow()
