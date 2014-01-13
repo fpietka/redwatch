@@ -29,7 +29,7 @@ class TaskWindow(QtGui.QMainWindow):
         self._refreshThread = RefreshThread(self)
         # XXX init refresh thread that will trigger refresh itself
         self.thread = WorkerTasks(self._app)
-        self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.notifyChanges)
+        self.connect(self.thread, QtCore.SIGNAL('refreshSignal'), self.refresh)
         self.thread.start()
         self.connect(self._refreshThread, QtCore.SIGNAL('refreshEnds'), self.updateData)
         self._setSystemTrayIcon()
@@ -258,6 +258,3 @@ class TaskWindow(QtGui.QMainWindow):
                 # change to next tab
                 if self._tabWidget.currentIndex() > 0:
                     self._tabWidget.setCurrentIndex(self._tabWidget.currentIndex() - 1)
-
-    def notifyChanges(self):
-        self.refresh()
