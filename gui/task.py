@@ -180,7 +180,7 @@ class TaskWindow(QtGui.QMainWindow):
         self.setGeometry(300, 300, 600, 600)
         self.setWidth()
 
-        self.setWindowTitle('Redmine tickets')
+        self.setWindowTitle('Redwatch')
         self.setWindowIcon(QtGui.QIcon(consts.mainIcon))
 
     #the width depends on the table width
