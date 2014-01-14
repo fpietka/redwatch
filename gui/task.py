@@ -185,7 +185,6 @@ class TaskWindow(QtGui.QMainWindow):
         self.setWindowTitle('Redwatch')
         self.setWindowIcon(QtGui.QIcon(consts.mainIcon))
 
-    #the width depends on the table width
     def setWidth(self):
         settings = SystemSettings()
         if not settings.value('windowResizable'):
@@ -196,7 +195,6 @@ class TaskWindow(QtGui.QMainWindow):
                 if tableWidth > self._tabWidget.currentWidget().layout().margin():
                     self.setFixedWidth(tableWidth + self._tabWidget.currentWidget().layout().margin() * 2)
 
-    #refresh the display
     def refresh(self):
         self.displayMessage('refreshing tabs ...')
         self.threads['refresh_signal'].start()
