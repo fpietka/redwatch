@@ -212,9 +212,12 @@ class TaskWindow(QtGui.QMainWindow):
             tabName = str(self._tabWidget.tabText(i))
             tabs[tabName] = self._tabWidget.widget(i)
         # refresh or create tabs
-        if tab and tab in tabs:
-            tabs[tab].setData(self.data[tab]['data'], self.data[tab]['header'])
-        elif not tab:
+        if tab:
+            if tab in tabs:
+                tabs[tab].setData(self.data[tab]['data'], self.data[tab]['header'])
+            else:
+                self._addNewTab(tab, self.data[tab]['data'], self.data[tab]['header'])
+        else:
             for tab, data in self.data.iteritems():
                 header = data['header']
                 data = data['data']
