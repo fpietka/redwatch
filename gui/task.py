@@ -196,15 +196,6 @@ class TaskWindow(QtGui.QMainWindow):
                 if tableWidth > self._tabWidget.currentWidget().layout().margin():
                     self.setFixedWidth(tableWidth + self._tabWidget.currentWidget().layout().margin() * 2)
 
-    #from a tickets list, the tickets infos are fetched, and saved, headers
-    #in one side and data in another
-    def setData(self, data):
-        # XXX old direct method, now use updateData
-        for t in data:
-            dataRow = Ticket.getTickets(data[t])
-            self.header[t] = dataRow['header']
-            self.data[t] = dataRow['data']
-
     #refresh the display
     def refresh(self):
         self.displayMessage('refreshing tabs ...')
