@@ -187,13 +187,13 @@ class TaskWindow(QtGui.QMainWindow):
 
     #the width depends on the table width
     def setWidth(self):
-        currentTab = self._tabWidget.currentWidget()
-        if (currentTab):
-            tableWidth = currentTab.getTable().width()
-            #the width must be changed only if the table is not empty
-            if tableWidth > self._tabWidget.currentWidget().layout().margin():
-                settings = SystemSettings()
-                if not settings.value('windowResizable'):
+        settings = SystemSettings()
+        if not settings.value('windowResizable'):
+            currentTab = self._tabWidget.currentWidget()
+            if (currentTab):
+                tableWidth = currentTab.getTable().width()
+                # the width must be changed only if the table is not empty
+                if tableWidth > self._tabWidget.currentWidget().layout().margin():
                     self.setFixedWidth(tableWidth + self._tabWidget.currentWidget().layout().margin() * 2)
 
     #from a tickets list, the tickets infos are fetched, and saved, headers
