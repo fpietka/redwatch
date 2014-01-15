@@ -144,7 +144,7 @@ class TaskWindow(QtGui.QMainWindow):
     def _deleteTab(self):
         #get the tab name and index
         currentTabIndex = self._tabWidget.currentIndex()
-        tabName = str(self._tabWidget.tabText(currentTabIndex))
+        tabName = self._tabWidget.tabText(currentTabIndex)
 
         #delete the tickets from the settings
         TasksManagement.purgeTickets(self._app, tabName, True)
