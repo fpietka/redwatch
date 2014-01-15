@@ -103,6 +103,7 @@ class TaskWindow(QtGui.QMainWindow):
                     QtGui.QMessageBox.critical(self, "Error", "This tab already exists")
         (orderField, orderWay) = self._getListOrder(name)
         index = self._tabWidget.addTab(TasksList(self, name, data, header, orderField, orderWay), name)
+        TasksManagement.addTab(self._app, name)
         self._tabWidget.setCurrentIndex(index)
 
     def _getListOrder(self, tabName):

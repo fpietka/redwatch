@@ -12,6 +12,13 @@ class TasksManagement:
         return tickets
 
     @staticmethod
+    def addTab(app, tabName):
+        ticketsIds = TasksManagement.getTicketsIds(app)
+        if tabName not in ticketsIds:
+            ticketsIds[tabName] = []
+            app._settings.setValue('tickets', ticketsIds)
+
+    @staticmethod
     def addTickets(app, tabName, ticketsToAdd):
         # XXX use thread here
         try:
