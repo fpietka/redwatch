@@ -81,17 +81,14 @@ class TaskWindow(QtGui.QMainWindow):
     def _addNewTab(self, name=False, data=[], header=[]):
         #if the tabname is not given, then, the user triggered the "add tab" action
         #else, the tab is loaded from the settings
-        if name is not False:
-            newTab = False
-        else:
-            newTab = True
+        if name is False:
             tabNameResult = True
             while not name or (self.data and name in self.data):
-                tabNameDResult = QtGui.QInputDialog.getText(self, "Tab name", "Tab name", QtGui.QLineEdit.Normal, "")
+                tabNameResult = QtGui.QInputDialog.getText(self, "Tab name", "Tab name", QtGui.QLineEdit.Normal, "")
                 #typed value
-                name = str(tabNameDResult[0])
+                name = str(tabNameResult[0])
                 #true if "ok", false if "cancel" or escape
-                tabNameResult = tabNameDResult[1]
+                tabNameResult = tabNameResult[1]
                 #if user cancelled the prompt, the action is stopped
                 if not tabNameResult:
                     return
