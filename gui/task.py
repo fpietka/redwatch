@@ -140,32 +140,18 @@ class TaskWindow(QtGui.QMainWindow):
         writer.writerows(csvData)
         QtGui.QMessageBox.information(self, "Tab saved", "The tab %s has been saved in the file %s" % (tabName, fileName))
 
-    #action to delete a tab
-    def _deleteTab(self):
-        #get the tab name and index
-        currentTabIndex = self._tabWidget.currentIndex()
-        tabName = self._tabWidget.tabText(currentTabIndex)
-
-        #delete the tickets from the settings
-        TasksManagement.purgeTickets(self._app, tabName, True)
-
-        #delete the tab
-        self._tabWidget.removeTab(currentTabIndex)
-
-        #refresh the display
+    def _purgeTickets(self, removeTab=False):
+        TasksManagement.purgeTickets(self._app, self._tabWidget.tabText(self._tabWidget.currentIndex()), removeTab)
         self.refresh()
+
+    def _deleteTab(self):
+        self._purgeTickets(True)
+        self._tabWidget.removeTab(currentTabIndex)
 
     #action to delete all tabs
     def _purgeTabs(self):
         TasksManagement.purgeTickets(self._app)
         self._tabWidget.clear()
-
-    #action to empty a tab, without deleting it
-    def _purgeTickets(self):
-        #delete tickets from settings
-        TasksManagement.purgeTickets(self._app, str(self._tabWidget.tabText(self._tabWidget.currentIndex())))
-
-        #refresh display
         self.refresh()
 
     #define window informations
