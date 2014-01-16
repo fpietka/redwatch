@@ -153,12 +153,8 @@ class TaskWindow(QtGui.QMainWindow):
         self._tabWidget.clear()
         self.refresh()
 
-    #define window informations
     def _setWindowInfos(self):
-        # default size
         self.setGeometry(300, 300, 600, 600)
-        self.setWidth()
-
         self.setWindowTitle('Redwatch')
         self.setWindowIcon(QtGui.QIcon(consts.mainIcon))
 
