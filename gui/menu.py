@@ -38,10 +38,10 @@ class ApplicationMenu(QtGui.QMenuBar):
         purgeTicketsAction.setStatusTip('Delete all tickets')
         purgeTicketsAction.triggered.connect(window._purgeTickets)
         #}}}
-        #{{{ purge tabs action
-        purgeTabsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Remove all tabs', window)
-        purgeTabsAction.setStatusTip('Delete all tabs')
-        purgeTabsAction.triggered.connect(window._purgeTabs)
+        #{{{ delete tabs action
+        deleteTabsAction = QtGui.QAction(QtGui.QIcon(consts.purgeIcon), '&Remove all tabs', window)
+        deleteTabsAction.setStatusTip('Delete all tabs')
+        deleteTabsAction.triggered.connect(window._deleteTabs)
         #}}}
         #{{{ settings window action
         showSettingsAction = QtGui.QAction(QtGui.QIcon(consts.settingsIcon), 'Se&ttings', window)
@@ -72,4 +72,4 @@ class ApplicationMenu(QtGui.QMenuBar):
         ticketMenu.addAction(purgeTicketsAction)
         ticketMenu.addAction(deleteCurrentTabAction)
         ticketMenu.addSeparator()
-        ticketMenu.addAction(purgeTabsAction)
+        ticketMenu.addAction(deleteTabsAction)

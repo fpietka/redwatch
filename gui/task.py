@@ -148,8 +148,7 @@ class TaskWindow(QtGui.QMainWindow):
         self._purgeTickets(True)
         self._tabWidget.removeTab(currentTabIndex)
 
-    #action to delete all tabs
-    def _purgeTabs(self):
+    def _deleteTabs(self):
         TasksManagement.purgeTickets(self._app)
         self._tabWidget.clear()
         self.refresh()
