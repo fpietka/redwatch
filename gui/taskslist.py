@@ -43,8 +43,6 @@ class TasksList(QtGui.QWidget):
 
         #button
         newTicketFieldButton = QtGui.QPushButton('Add Ticket')
-
-        #button event
         newTicketFieldButton.clicked.connect(self._addTickets)
 
         #add the text field and the button in the horizontal layout
@@ -62,7 +60,6 @@ class TasksList(QtGui.QWidget):
 
     #events methods
 
-    #method called if a cell is clicked
     def _clickedRow(self, cell):
         #first get the corresponding column
         field = self._table.getColumnNameFromIndex(cell.column())
@@ -85,14 +82,12 @@ class TasksList(QtGui.QWidget):
                 self._parent.removeTicket(self._name, ticketIdToRemove)
                 self._parent.displayMessage('Ticket deleted')
 
-    #if a cell is double clicked
     def _doubleClickedRow(self, cell):
         field = self._table.getColumnNameFromIndex(cell.column())
         #if the cell is the url, open it in the default webbrowser
         if field == 'id':
             webbrowser.open(self._parent._app._settings.value('redmineUrl') + '/issues/' + str(cell.data()))
 
-    #if the add tickets button is pressed
     def _addTickets(self):
         #get the text field's value
         enteredValue = self.newTicketField.text()
