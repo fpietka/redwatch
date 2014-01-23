@@ -4,10 +4,11 @@ from redmine.api import Api
 class Ticket:
 
     @staticmethod
-    def getTickets(ticketsIdsList):
-
+    def getTickets(ticketsIdsList, headers=None):
         if len(ticketsIdsList) == 0:
             return {'header': [], 'data': []}
+        if not headers:
+            headers = ['id', 'project_name', 'subject', 'priority_name', 'status_name', 'assigned_to_name']
 
         api = Api()
         results = list()
@@ -23,35 +24,14 @@ class Ticket:
                     if type(parameter[1]) is dict and 'name' in parameter[1]:
                         formated_issue[parameter[0] + '_name'] = parameter[1]['name']
                 # remove some key
-                keys_to_remove = (
-                    'status',
-                    'priority',
-                    'custom_fields',
-                    'parent',
-                    'category',
-                    'project',
-                    'assigned_to',
-                    'tracker',
-                    'author',
-                    'description',
-                    'updated_on',
-                    'done_ratio',
-                    'due_date',
-
-                    'tracker_name',
-                    'category_name',
-                    'author_name',
-                    'created_on',
-                    'start_date'
-                )
+                keys_to_remove = list()
+                for key in formated_issue:
+                    if key not in headers:
+                        keys_to_remove.append(key)
                 for key in keys_to_remove:
                     formated_issue.pop(key, None)
                 if 'assigned_to_name' not in formated_issue:
                     formated_issue['assigned_to_name'] = ''
                 results.append(formated_issue)
 
-        #header = results[0].keys()
-        # XXX forced headers
-        header = ['id', 'project_name', 'subject', 'priority_name', 'status_name', 'assigned_to_name']
-
-        return {'header': header, 'data': results}
+        return {'header': headers, 'data': results}
